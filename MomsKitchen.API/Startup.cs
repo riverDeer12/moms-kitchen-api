@@ -1,16 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
+using MomsKitchen.API.Configuration;
+using MomsKitchen.API.Extensions;
 
 namespace MomsKitchen.API
 {
@@ -27,11 +21,18 @@ namespace MomsKitchen.API
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "MomsKitchen.API", Version = "v1" });
-            });
+            services.AddControllerServices();
+            services.AddRepositories();
+            services.AddServiceResponses();
+            services.AddSwaggerConfig();
+            services.AddIdentityConfig();
+            services.AddDbContextConfig(Configuration);
+            services.AddCors();
+            services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
+            services.AddAuthorization();
+            services.ConfigureAuthentication(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,8 +49,12 @@ namespace MomsKitchen.API
 
             app.UseRouting();
 
+            app.UseAuthentication();
+
             app.UseAuthorization();
 
+            app.UseCors(builder => builder.WithOrigins(Configuration["ApplicationSettings:ClientUrl"]).AllowAnyHeader().AllowAnyMethod());
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

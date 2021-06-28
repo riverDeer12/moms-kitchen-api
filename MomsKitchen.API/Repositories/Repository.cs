@@ -1,0 +1,68 @@
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using MomsKitchen.API.Services.Auth;
+using MomsKitchen.DATA;
+
+namespace MomsKitchen.API.Repositories
+{
+    public class Repository<Entity>: IRepository<Entity> where Entity : class
+    {
+        private readonly Model _db;
+        private readonly IAuthService _authService;
+
+        public Repository(Model context, IAuthService authService)
+        {
+            _db = context;
+            _authService = authService;
+        }
+
+        public async Task<bool> Add(Entity entity)
+        {
+            _db.Set<Entity>().Add(entity);
+
+            return await Save();
+        }
+
+        public async Task<bool> Exists(string entityId)
+        {
+            return await Find(entityId) != null;
+        }
+
+        public async Task<Entity> Find(string entityId)
+        {
+            return await _db.Set<Entity>().FindAsync(entityId);
+        }
+
+        public async Task<List<Entity>> GetAll()
+        {
+            return await _db.Set<Entity>().ToListAsync();
+        }
+
+        public async Task<bool> Update(Entity entity)
+        {
+            _db.Set<Entity>().Update(entity);
+
+            return await Save();
+        }
+
+        public async Task<bool> Save()
+        {
+            if (!_db.ChangeTracker.HasChanges()) return true;
+
+            try
+            {
+                var result = await _db.SaveChangesAsync();
+
+                return result > 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return false;
+        }
+    }
+}
