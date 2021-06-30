@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MomsKitchen.API.Services;
@@ -28,7 +29,7 @@ namespace MomsKitchen.API.Controllers
 
         [HttpGet]
         [Route("{categoryId}")]
-        public async Task<IActionResult> Get([FromRoute] string categoryId)
+        public async Task<IActionResult> Get([FromRoute] Guid categoryId)
         {
             var response = await _categoriesService.GetCategory(categoryId);
 
@@ -49,7 +50,7 @@ namespace MomsKitchen.API.Controllers
 
         [HttpPut]
         [Route("{categoryId}")]
-        public async Task<IActionResult> Put([FromRoute] string categoryId, UpdateCategoryRequest request)
+        public async Task<IActionResult> Put([FromRoute] Guid categoryId, UpdateCategoryRequest request)
         {
             var response = await _categoriesService.UpdateCategory(categoryId, request);
 
@@ -60,7 +61,7 @@ namespace MomsKitchen.API.Controllers
 
         [HttpDelete]
         [Route("{categoryId}")]
-        public async Task<IActionResult> Delete([FromRoute] string categoryId)
+        public async Task<IActionResult> Delete([FromRoute] Guid categoryId)
         {
             var response = await _categoriesService.DeleteCategory(categoryId);
 

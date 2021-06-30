@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -11,9 +12,9 @@ namespace MomsKitchen.API.Repositories
 
         Task<bool> Add(Entity entity);
 
-        Task<bool> Exists(string entityId);
+        Task<bool> Exists(Guid entityId);
 
-        Task<Entity> Find(string entityId);
+        Task<Entity> Find(Guid entityId);
 
         Task<bool> Update(Entity entity);
     }

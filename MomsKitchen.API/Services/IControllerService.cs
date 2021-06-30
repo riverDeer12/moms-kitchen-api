@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 
 namespace MomsKitchen.API.Services
@@ -9,13 +10,13 @@ namespace MomsKitchen.API.Services
     {
         Task<IServiceResponse<Entity>> GetAll();
 
-        Task<IServiceResponse<Entity>> Get(string entityId);
+        Task<IServiceResponse<Entity>> Get(Guid entityId);
 
-        Task<IServiceResponse<Entity>> Delete(string entityId);
+        Task<IServiceResponse<Entity>> Delete(Guid entityId);
 
         Task<IServiceResponse<Entity>> Create(PostRequest request);
 
-        Task<IServiceResponse<Entity>> Update(string entityId, UpdateRequest request);
+        Task<IServiceResponse<Entity>> Update(Guid entityId, UpdateRequest request);
 
         Entity SetCreateProperties(Entity entity);
 

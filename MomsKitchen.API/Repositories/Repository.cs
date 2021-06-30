@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MomsKitchen.API.Services.Auth;
@@ -25,12 +28,12 @@ namespace MomsKitchen.API.Repositories
             return await Save();
         }
 
-        public async Task<bool> Exists(string entityId)
+        public async Task<bool> Exists(Guid entityId)
         {
             return await Find(entityId) != null;
         }
 
-        public async Task<Entity> Find(string entityId)
+        public async Task<Entity> Find(Guid entityId)
         {
             return await _db.Set<Entity>().FindAsync(entityId);
         }

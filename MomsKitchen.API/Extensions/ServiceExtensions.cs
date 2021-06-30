@@ -60,7 +60,7 @@ namespace MomsKitchen.API.Extensions
                 {
                     c.SwaggerDoc("v1", new OpenApiInfo
                     {
-                        Title = "REST API Boilerplate",
+                        Title = "Moms Kitchen API",
                         Version = "v1"
                     });
 

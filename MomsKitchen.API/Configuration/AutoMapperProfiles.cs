@@ -13,6 +13,7 @@ namespace MomsKitchen.API.Configuration
             /// Recipe mappers.
             /// </summary>
             /// <typeparam name="PostRecipeRequest"></typeparam>
+            /// <typeparam name="UpdateRecipeRequest"></typeparam>
             /// <typeparam name="Recipe"></typeparam>
             /// <returns></returns>
             CreateMap<PostRecipeRequest, Recipe>();
@@ -22,6 +23,7 @@ namespace MomsKitchen.API.Configuration
             /// Category mappers.
             /// </summary>
             /// <typeparam name="PostCategoryRequest"></typeparam>
+            /// <typeparam name="UpdateCategoryRequest"></typeparam>
             /// <typeparam name="Category"></typeparam>
             /// <returns></returns>
             CreateMap<PostCategoryRequest, Category>();

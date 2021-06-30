@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using AutoMapper;
 using MomsKitchen.API.Repositories;
@@ -17,12 +18,12 @@ namespace MomsKitchen.API.Services.Categories
 
         public async Task<IServiceResponse<Category>> GetCategories() => await GetAll();
 
-        public async Task<IServiceResponse<Category>> GetCategory(string categoryId) => await Get(categoryId);
+        public async Task<IServiceResponse<Category>> GetCategory(Guid categoryId) => await Get(categoryId);
 
-        public async Task<IServiceResponse<Category>> DeleteCategory(string categoryId) => await Delete(categoryId);
+        public async Task<IServiceResponse<Category>> DeleteCategory(Guid categoryId) => await Delete(categoryId);
 
         public async Task<IServiceResponse<Category>> CreateCategory(PostCategoryRequest request) => await Create(request);
 
-        public async Task<IServiceResponse<Category>> UpdateCategory(string categoryId, UpdateCategoryRequest request) => await Update(categoryId, request);
+        public async Task<IServiceResponse<Category>> UpdateCategory(Guid categoryId, UpdateCategoryRequest request) => await Update(categoryId, request);
     }
 }

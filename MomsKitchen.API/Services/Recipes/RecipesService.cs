@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using AutoMapper;
 using MomsKitchen.API.Repositories;
@@ -17,12 +18,12 @@ namespace MomsKitchen.API.Services.Recipes
 
         public async Task<IServiceResponse<Recipe>> GetRecipes() => await GetAll();
 
-        public async Task<IServiceResponse<Recipe>> GetRecipe(string categoryId) => await Get(categoryId);
+        public async Task<IServiceResponse<Recipe>> GetRecipe(Guid recipeId) => await Get(recipeId);
 
-        public async Task<IServiceResponse<Recipe>> DeleteRecipe(string categoryId) => await Delete(categoryId);
+        public async Task<IServiceResponse<Recipe>> DeleteRecipe(Guid recipeId) => await Delete(recipeId);
 
         public async Task<IServiceResponse<Recipe>> CreateRecipe(PostRecipeRequest request) => await Create(request);
 
-        public async Task<IServiceResponse<Recipe>> UpdateRecipe(string categoryId, UpdateRecipeRequest request) => await Update(categoryId, request);
+        public async Task<IServiceResponse<Recipe>> UpdateRecipe(Guid recipeId, UpdateRecipeRequest request) => await Update(recipeId, request);
     }
 }

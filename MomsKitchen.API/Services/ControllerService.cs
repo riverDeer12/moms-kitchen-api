@@ -46,11 +46,11 @@ namespace MomsKitchen.API.Services
             return _response.Error(ErrorMessages.ErrorSaving);
         }
 
-        public async Task<IServiceResponse<Entity>> Delete(string entityId)
+        public async Task<IServiceResponse<Entity>> Delete(Guid entityId)
         {
             var entity = await _repository.Find(entityId);
 
-            if (entity == null) _response.Error(ErrorMessages.NotFound);
+            if (entity == null) return _response.Error(ErrorMessages.NotFound);
 
             entity = SetDeleteProperties(entity);
 
@@ -61,7 +61,7 @@ namespace MomsKitchen.API.Services
             return _response.Error(ErrorMessages.ErrorDeleting);
         }
 
-        public async Task<IServiceResponse<Entity>> Get(string entityId)
+        public async Task<IServiceResponse<Entity>> Get(Guid entityId)
         {
             var entity = await _repository.Find(entityId);
 
@@ -77,14 +77,13 @@ namespace MomsKitchen.API.Services
             return _response.Successfull(entities);
         }
 
-        public async Task<IServiceResponse<Entity>>
-        Update(string entityId, UpdateRequest request)
+        public async Task<IServiceResponse<Entity>> Update(Guid entityId, UpdateRequest request)
         {
             var entity = await _repository.Find(entityId);
 
             if (entity == null) return _response.Error(ErrorMessages.NotFound);
 
-            entity = _mapper.Map<Entity>(request);
+            entity = _mapper.Map(request, entity);
 
             entity = SetUpdateProperties(entity);
 
@@ -155,7 +154,10 @@ namespace MomsKitchen.API.Services
 
         public Entity SetDeleteProperties(Entity entity)
         {
-            entity.GetType().GetProperty("IsDeleted").SetValue(entity, true);
+            entity
+                .GetType()
+                .GetProperty("IsDeleted")
+                .SetValue(entity, true);
             entity
                 .GetType()
                 .GetProperty("DeletedAt")
