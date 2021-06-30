@@ -1,0 +1,15 @@
+C:\_projects\moms-kitchen-api\MomsKitchen.DATA\bin\Debug\net5.0\MomsKitchen.DATA.deps.json
+C:\_projects\moms-kitchen-api\MomsKitchen.DATA\bin\Debug\net5.0\MomsKitchen.DATA.dll
+C:\_projects\moms-kitchen-api\MomsKitchen.DATA\bin\Debug\net5.0\ref\MomsKitchen.DATA.dll
+C:\_projects\moms-kitchen-api\MomsKitchen.DATA\bin\Debug\net5.0\MomsKitchen.DATA.pdb
+C:\_projects\moms-kitchen-api\MomsKitchen.DATA\obj\Debug\net5.0\MomsKitchen.DATA.GeneratedMSBuildEditorConfig.editorconfig
+C:\_projects\moms-kitchen-api\MomsKitchen.DATA\obj\Debug\net5.0\MomsKitchen.DATA.AssemblyInfoInputs.cache
+C:\_projects\moms-kitchen-api\MomsKitchen.DATA\obj\Debug\net5.0\MomsKitchen.DATA.AssemblyInfo.cs
+C:\_projects\moms-kitchen-api\MomsKitchen.DATA\obj\Debug\net5.0\MomsKitchen.DATA.csproj.CoreCompileInputs.cache
+C:\_projects\moms-kitchen-api\MomsKitchen.DATA\obj\Debug\net5.0\MomsKitchen.DATA.dll
+C:\_projects\moms-kitchen-api\MomsKitchen.DATA\obj\Debug\net5.0\ref\MomsKitchen.DATA.dll
+C:\_projects\moms-kitchen-api\MomsKitchen.DATA\obj\Debug\net5.0\MomsKitchen.DATA.pdb
+C:\_projects\moms-kitchen-api\MomsKitchen.DATA\bin\Debug\net5.0\MomsKitchen.DATA.runtimeconfig.json
+C:\_projects\moms-kitchen-api\MomsKitchen.DATA\bin\Debug\net5.0\MomsKitchen.DATA.runtimeconfig.dev.json
+C:\_projects\moms-kitchen-api\MomsKitchen.DATA\obj\Debug\net5.0\MomsKitchen.DATA.genruntimeconfig.cache
+C:\_projects\moms-kitchen-api\MomsKitchen.DATA\obj\Debug\net5.0\MomsKitchen.DATA.csprojAssemblyReference.cache

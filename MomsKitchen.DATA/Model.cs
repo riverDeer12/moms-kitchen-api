@@ -7,7 +7,7 @@ using MomsKitchen.DATA.Entities;
 
 namespace MomsKitchen.DATA
 {
-public class Model : IdentityDbContext
+    public class Model : IdentityDbContext
     {
         private const string SUPERADMIN_ID = "cd75a482-cac0-45f2-9c20-bae54f363742";
         private const string SUPERADMIN_ROLE_ID = "69a4116d-b1bd-4f0b-b6a7-a13bb5eb639f";
@@ -77,7 +77,7 @@ public class Model : IdentityDbContext
             modelBuilder.Entity<RecipeCategory>(entity =>
             {
                 entity.ToTable("RecipeCategories");
-                entity.HasKey(categoryItem => new { categoryItem.RecipeId, categoryItem.CategoryId });
+                entity.HasKey(recipeCategoryItem => new { recipeCategoryItem.RecipeId, recipeCategoryItem.CategoryId });
             });
 
             modelBuilder.Entity<RecipeCategory>()
