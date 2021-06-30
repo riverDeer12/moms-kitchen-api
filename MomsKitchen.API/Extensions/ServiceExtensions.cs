@@ -10,6 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using MomsKitchen.API.Repositories;
 using MomsKitchen.API.Services;
+using MomsKitchen.API.Services.ApplicationUsers;
 using MomsKitchen.API.Services.Auth;
 using MomsKitchen.API.Services.Categories;
 using MomsKitchen.API.Services.Recipes;
@@ -29,6 +30,7 @@ namespace MomsKitchen.API.Extensions
                 typeof(ControllerService<,,>));
             services.AddScoped<IRecipesService, RecipesService>();
             services.AddScoped<ICategoriesService, CategoriesService>();
+            services.AddScoped<IUsersService, UsersService>();
             services.AddScoped<IAuthService, AuthService>();
         }
 
