@@ -60,6 +60,7 @@ namespace MomsKitchen.API.Extensions
         {
             services.AddSwaggerGen(c =>
                 {
+
                     c.SwaggerDoc("v1", new OpenApiInfo
                     {
                         Title = "Moms Kitchen API",
