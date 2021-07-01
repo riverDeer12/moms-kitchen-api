@@ -20,54 +20,34 @@ namespace MomsKitchen.API.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var response = await _categoriesService.GetCategories();
-
-            if (!response.Success) return BadRequest(response);
-
-            return Ok(response);
+            return Ok(await _categoriesService.GetCategories());
         }
 
         [HttpGet]
         [Route("{categoryId}")]
         public async Task<IActionResult> Get([FromRoute] Guid categoryId)
         {
-            var response = await _categoriesService.GetCategory(categoryId);
-
-            if (!response.Success) return BadRequest(response);
-
-            return Ok(response);
+            return Ok(await _categoriesService.GetCategory(categoryId));
         }
 
         [HttpPost]
         public async Task<IActionResult> Post(PostCategoryRequest request)
         {
-            var response = await _categoriesService.CreateCategory(request);
-
-            if (!response.Success) return BadRequest(response);
-
-            return Ok(response);
+            return Ok(await _categoriesService.CreateCategory(request));
         }
 
         [HttpPut]
         [Route("{categoryId}")]
         public async Task<IActionResult> Put([FromRoute] Guid categoryId, UpdateCategoryRequest request)
         {
-            var response = await _categoriesService.UpdateCategory(categoryId, request);
-
-            if (!response.Success) return BadRequest(response);
-
-            return Ok(response);
+            return Ok(await _categoriesService.UpdateCategory(categoryId, request));
         }
 
         [HttpDelete]
         [Route("{categoryId}")]
         public async Task<IActionResult> Delete([FromRoute] Guid categoryId)
         {
-            var response = await _categoriesService.DeleteCategory(categoryId);
-
-            if (!response.Success) return BadRequest(response);
-
-            return Ok(response);
+            return Ok(await _categoriesService.DeleteCategory(categoryId));
         }
     }
 }
