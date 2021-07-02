@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using MomsKitchen.API.Repositories;
@@ -12,18 +13,27 @@ namespace MomsKitchen.API.Services.Recipes
     {
         public RecipesService(
         IRepository<Recipe> repository,
-        IServiceResponse<Recipe> response,
         IMapper mapper,
-        IAuthService authService):base(repository, response, mapper, authService){}
+        IAuthService authService):base(repository, mapper, authService){}
 
-        public async Task<IServiceResponse<Recipe>> GetRecipes() => await GetAll();
+        public async Task<List<RecipeDetails>> GetRecipes() 
+        { 
+            var recipes = await GetAll();
 
-        public async Task<IServiceResponse<Recipe>> GetRecipe(Guid recipeId) => await Get(recipeId);
+            return _mapper.Map<List<RecipeDetails>>(recipes);
+        } 
 
-        public async Task<IServiceResponse<Recipe>> DeleteRecipe(Guid recipeId) => await Delete(recipeId);
+        public async Task<RecipeDetails> GetRecipe(Guid recipeId)
+        {
+            var recipe = await Get(recipeId);
 
-        public async Task<IServiceResponse<Recipe>> CreateRecipe(PostRecipeRequest request) => await Create(request);
+            return _mapper.Map<RecipeDetails>(recipe);
+        }
 
-        public async Task<IServiceResponse<Recipe>> UpdateRecipe(Guid recipeId, UpdateRecipeRequest request) => await Update(recipeId, request);
+        public async Task<bool> DeleteRecipe(Guid recipeId) => await Delete(recipeId);
+
+        public async Task<bool> CreateRecipe(PostRecipeRequest request) => await Create(request);
+
+        public async Task<bool> UpdateRecipe(Guid recipeId, UpdateRecipeRequest request) => await Update(recipeId, request);
     }
 }

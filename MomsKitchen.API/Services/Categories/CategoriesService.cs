@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using MomsKitchen.API.Repositories;
@@ -12,18 +13,27 @@ namespace MomsKitchen.API.Services.Categories
     {
         public CategoriesService(
         IRepository<Category> repository,
-        IServiceResponse<Category> response,
         IMapper mapper,
-        IAuthService authService):base(repository, response, mapper, authService){}
+        IAuthService authService):base(repository, mapper, authService){}
 
-        public async Task<IServiceResponse<Category>> GetCategories() => await GetAll();
+        public async Task<List<CategoryDetails>> GetCategories()
+        {
+            var categories = await _repository.GetAll();
 
-        public async Task<IServiceResponse<Category>> GetCategory(Guid categoryId) => await Get(categoryId);
+            return _mapper.Map<List<CategoryDetails>>(categories);
+        }
 
-        public async Task<IServiceResponse<Category>> DeleteCategory(Guid categoryId) => await Delete(categoryId);
+        public async Task<CategoryDetails> GetCategory(Guid categoryId)
+        {
+            var category = await _repository.Find(categoryId);
 
-        public async Task<IServiceResponse<Category>> CreateCategory(PostCategoryRequest request) => await Create(request);
+            return _mapper.Map<CategoryDetails>(category);
+        }
 
-        public async Task<IServiceResponse<Category>> UpdateCategory(Guid categoryId, UpdateCategoryRequest request) => await Update(categoryId, request);
+        public async Task<bool> DeleteCategory(Guid categoryId) => await Delete(categoryId);
+
+        public async Task<bool> CreateCategory(PostCategoryRequest request) => await Create(request);
+
+        public async Task<bool> UpdateCategory(Guid categoryId, UpdateCategoryRequest request) => await Update(categoryId, request);
     }
 }

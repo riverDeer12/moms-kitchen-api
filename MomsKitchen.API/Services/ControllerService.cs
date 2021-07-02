@@ -1,9 +1,11 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using MomsKitchen.API.Constants;
 using MomsKitchen.API.Repositories;
 using MomsKitchen.API.Services.Auth;
+using MomsKitchen.DATA.Exceptions;
 
 namespace MomsKitchen.API.Services
 {
@@ -12,87 +14,60 @@ namespace MomsKitchen.API.Services
         where PostRequest: class 
         where UpdateRequest: class
     {
-        private readonly IRepository<Entity> _repository;
+        protected readonly IRepository<Entity> _repository;
 
-        private readonly IServiceResponse<Entity> _response;
+        protected readonly IAuthService _authService;
 
-        private readonly IAuthService _authService;
-
-        private readonly IMapper _mapper;
+        protected readonly IMapper _mapper;
 
         public ControllerService(
             IRepository<Entity> repository,
-            IServiceResponse<Entity> response,
             IMapper mapper,
             IAuthService authService
         )
         {
             _repository = repository;
-            _response = response;
             _mapper = mapper;
             _authService = authService;
         }
 
-        public async Task<IServiceResponse<Entity>> Create(PostRequest request)
+        public async Task<Entity> Get(Guid entityId) => await _repository.Find(entityId);
+
+        public async Task<List<Entity>> GetAll() => await _repository.GetAll();
+
+        public async Task<bool> Create(PostRequest request)
         {
             var entity = _mapper.Map<Entity>(request);
 
             entity = SetCreateProperties(entity);
 
-            var result = await _repository.Add(entity);
-
-            if (result) return _response.Successfull();
-
-            return _response.Error(ErrorMessages.ErrorSaving);
+            return await _repository.Add(entity);
         }
 
-        public async Task<IServiceResponse<Entity>> Delete(Guid entityId)
+        public async Task<bool> Delete(Guid entityId)
         {
             var entity = await _repository.Find(entityId);
 
-            if (entity == null) return _response.Error(ErrorMessages.NotFound);
+            if (entity == null) 
+                throw new NotFoundException(ErrorMessages.NotFound);
 
             entity = SetDeleteProperties(entity);
 
-            var result = await _repository.Update(entity);
-
-            if (result) return _response.Successfull();
-
-            return _response.Error(ErrorMessages.ErrorDeleting);
+            return await _repository.Update(entity);
         }
 
-        public async Task<IServiceResponse<Entity>> Get(Guid entityId)
+        public async Task<bool> Update(Guid entityId, UpdateRequest request)
         {
             var entity = await _repository.Find(entityId);
-
-            if (entity == null) return _response.Error(ErrorMessages.NotFound);
-
-            return _response.Successfull(entity);
-        }
-
-        public async Task<IServiceResponse<Entity>> GetAll()
-        {
-            var entities = await _repository.GetAll();
-
-            return _response.Successfull(entities);
-        }
-
-        public async Task<IServiceResponse<Entity>> Update(Guid entityId, UpdateRequest request)
-        {
-            var entity = await _repository.Find(entityId);
-
-            if (entity == null) return _response.Error(ErrorMessages.NotFound);
 
             entity = _mapper.Map(request, entity);
 
             entity = SetUpdateProperties(entity);
 
-            var result = await _repository.Update(entity);
-
-            if (result) return _response.Successfull();
-
-            return _response.Error(ErrorMessages.ErrorUpdating);
+            return await _repository.Update(entity);
         }
+
+        #region Timestamp properties
 
         public Entity SetCreateProperties(Entity entity)
         {
@@ -169,5 +144,8 @@ namespace MomsKitchen.API.Services
 
             return entity;
         }
+
+        #endregion
+
     }
 }

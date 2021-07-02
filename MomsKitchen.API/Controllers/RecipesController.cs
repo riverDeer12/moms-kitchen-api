@@ -10,8 +10,6 @@ namespace MomsKitchen.API.Controllers
 
     [ApiController]
     [Route("[controller]")]
-    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public class RecipesController : ControllerBase
     {
         private readonly IRecipesService _recipesService;

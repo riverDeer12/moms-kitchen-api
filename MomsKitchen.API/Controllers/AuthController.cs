@@ -25,26 +25,14 @@ namespace MomsKitchen.API.Controllers
         [Route("login")]
         public async Task<IActionResult> Login(LoginRequest request)
         {
-            var response = await _authService.CheckUser(request);
-
-            if (!response.Success) return Unauthorized(response);
-
-            var token = await _authService.GenerateJwtToken(response.Result);
-
-            return Ok(new { token });
+            return Ok(await _authService.CheckUser(request));
         }
 
         [HttpPost]
         [Route("register")]
         public async Task<IActionResult> Register(PostUserRequest request)
         {
-            var response = await _usersService.CreateUser(request);
-
-            if (!response.Success) return BadRequest(response);
-
-            var token = await _authService.GenerateJwtToken(response.Result);
-
-            return Ok(new { token });
+            return Ok(await _usersService.CreateUser(request));
         }
     }
 }

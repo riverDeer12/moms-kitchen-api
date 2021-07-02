@@ -23,19 +23,19 @@ namespace MomsKitchen.API.Services.Auth
 
         private readonly ApplicationSettings _appSettings;
 
-        private readonly IServiceResponse<ApplicationUser> _response;
+        private readonly IAuthService _authService;
 
         public AuthService(
             IOptions<ApplicationSettings> appSettings,
             UserManager<ApplicationUser> userManager,
             IHttpContextAccessor httpContextAccessor,
-            IServiceResponse<ApplicationUser> response
+            IAuthService authService
         )
         {
             _httpContextAccessor = httpContextAccessor;
             _appSettings = appSettings.Value;
             _userManager = userManager;
-            _response = response;
+            _authService = authService;
         }
 
         public Guid? GetLoggedUserId()
@@ -56,17 +56,21 @@ namespace MomsKitchen.API.Services.Auth
             return updateResult.Succeeded;
         }
 
-        public async Task<IServiceResponse<ApplicationUser>> CheckUser(LoginRequest request)
+        public async Task<object> CheckUser(LoginRequest request)
         {
             var user = await _userManager.FindByNameAsync(request.UserName);
 
-            if (user == null) return _response.Error(ErrorMessages.NotFound);
+            if (user == null)
+                throw new BadHttpRequestException(ErrorMessages.NotFound);
 
             var validUser = await _userManager.CheckPasswordAsync(user, request.Password);
 
-            if (!validUser) return _response.Error();
+            if (!validUser)
+                throw new BadHttpRequestException(ErrorMessages.ValidationError);
 
-            return _response.Successfull(user);
+            var token = await _authService.GenerateJwtToken(user);
+
+            return new { token };
         }
 
         public async Task<string> GenerateJwtToken(ApplicationUser user)

@@ -9,7 +9,7 @@ namespace MomsKitchen.API.Services.Auth
     public interface IAuthService
     {
         Guid? GetLoggedUserId();
-        Task<IServiceResponse<ApplicationUser>> CheckUser(LoginRequest request);
+        Task<object> CheckUser(LoginRequest request);
         Task<string> GenerateJwtToken(ApplicationUser user);
         Task<SecurityTokenDescriptor> SetTokenDescriptor(ApplicationUser user);
         Task<string> GetUserRoles(ApplicationUser user);

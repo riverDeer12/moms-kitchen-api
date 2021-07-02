@@ -5,8 +5,10 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using MomsKitchen.API.Constants;
 using MomsKitchen.API.Services.Auth;
 using MomsKitchen.DATA;
+using MomsKitchen.DATA.Exceptions;
 
 namespace MomsKitchen.API.Repositories
 {
@@ -35,7 +37,12 @@ namespace MomsKitchen.API.Repositories
 
         public async Task<Entity> Find(Guid entityId)
         {
-            return await _db.Set<Entity>().FindAsync(entityId);
+            var entity = await _db.Set<Entity>().FindAsync(entityId);
+
+            if(entity == null) 
+                throw new NotFoundException(ErrorMessages.NotFound);
+
+            return entity;
         }
 
         public async Task<List<Entity>> GetAll()
@@ -62,10 +69,10 @@ namespace MomsKitchen.API.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw new BadRequestException(ex.Message);
             }
 
-            return false;
+            throw new BadRequestException(ErrorMessages.ErrorSaving);
         }
     }
 }

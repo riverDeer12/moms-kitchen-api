@@ -5,47 +5,53 @@ using MomsKitchen.API.Repositories;
 using MomsKitchen.API.Services.Auth;
 using MomsKitchen.DATA.DTO.ApplicationUsers;
 using MomsKitchen.DATA.Entities;
+using MomsKitchen.DATA.Exceptions;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace MomsKitchen.API.Services.ApplicationUsers
 {
     public class UsersService: ControllerService<ApplicationUser, PostUserRequest, UpdateUserRequest>, IUsersService
     {
-        private readonly IMapper _mapper;
-
         private readonly UserManager<ApplicationUser> _userManager;
-
-        private readonly IServiceResponse<ApplicationUser> _response;
 
         public UsersService(
                 UserManager<ApplicationUser> userManager,
                 IRepository<ApplicationUser> repository,
-                IServiceResponse<ApplicationUser> response,
                 IMapper mapper,
-                IAuthService authService) : base(repository, response, mapper, authService)
+                IAuthService authService) : base(repository, mapper, authService)
         {
-            _mapper = mapper;
             _userManager = userManager;
-            _response = response;
         }
 
-        public async Task<IServiceResponse<ApplicationUser>> GetUsers() => await GetAll();
+        public async Task<List<ApplicationUserDetails>> GetUsers()
+        {
+            var users = await _repository.GetAll();
 
-        public async Task<IServiceResponse<ApplicationUser>> DeleteUser(Guid userId) => await Delete(userId);
+            return _mapper.Map<List<ApplicationUserDetails>>(users);
+        }
 
-        public async Task<IServiceResponse<ApplicationUser>> GetUser(Guid userId) => await Get(userId);
+        public async Task<bool> DeleteUser(Guid userId) => await Delete(userId);
 
-        public async Task<IServiceResponse<ApplicationUser>> GetByUserName(string username)
+        public async Task<ApplicationUserDetails> GetUser(Guid userId)
+        {
+            var user = await _repository.Find(userId);
+
+            return _mapper.Map<ApplicationUserDetails>(user);
+        }
+
+        public async Task<ApplicationUserDetails> GetByUserName(string username)
         {
             var user = await _userManager.FindByNameAsync(username);
 
-            if (user == null) return _response.Error();
+            if (user == null)
+                throw new NotFoundException(ErrorMessages.NotFound);
 
-            return _response.Successfull(user);
+            return _mapper.Map<ApplicationUserDetails>(user);
         }
 
-        public async Task<IServiceResponse<ApplicationUser>> CreateUser(PostUserRequest request)
+        public async Task<bool> CreateUser(PostUserRequest request)
         {
             var userData = _mapper.Map<ApplicationUser>(request);
 
@@ -57,19 +63,19 @@ namespace MomsKitchen.API.Services.ApplicationUsers
                 var creationResult = await _userManager.CreateAsync(userData, request.Password);
 
                 if (!creationResult.Succeeded)
-                    return _response.Error(ErrorMessages.ValidationError);
+                    throw new BadRequestException(ErrorMessages.ErrorSaving);
 
                 await _userManager.AddToRoleAsync(userData, UserRoles.User);
 
-                return _response.Successfull(userData);
+                return true;
             }
             catch (Exception ex)
             {
-                return _response.Error(ex.Message);
+                throw new BadRequestException(ex.Message);
             }
         }
 
-        public async Task<IServiceResponse<ApplicationUser>> CreateAdmin(PostUserRequest request)
+        public async Task<bool> CreateAdmin(PostUserRequest request)
         {
             var userData = _mapper.Map<ApplicationUser>(request);
 
@@ -80,23 +86,24 @@ namespace MomsKitchen.API.Services.ApplicationUsers
                 var creationResult = await _userManager.CreateAsync(userData, request.Password);
 
                 if (!creationResult.Succeeded)
-                    return _response.Error(ErrorMessages.ValidationError);
+                    throw new BadRequestException(ErrorMessages.ValidationError);
 
                 await _userManager.AddToRoleAsync(userData, UserRoles.Admin);
 
-                return _response.Successfull(userData);
+                return true;
             }
             catch (Exception ex)
             {
-                return _response.Error(ex.Message);
+                throw new BadRequestException(ex.Message);
             }
         }
 
-        public async Task<IServiceResponse<ApplicationUser>> UpdateUser(Guid userId, UpdateUserRequest request)
+        public async Task<bool> UpdateUser(Guid userId, UpdateUserRequest request)
         {
             var user = await _userManager.FindByIdAsync(userId.ToString());
 
-            if (user == null) return _response.Error(ErrorMessages.NotFound);
+            if (user == null)
+                throw new BadRequestException(ErrorMessages.NotFound);
 
             user = _mapper.Map(request, user);
 
@@ -106,13 +113,14 @@ namespace MomsKitchen.API.Services.ApplicationUsers
             {
                 var updateResult = await _userManager.UpdateAsync(user);
 
-                if (updateResult.Succeeded) return _response.Successfull();
+                if (!updateResult.Succeeded)
+                    throw new BadRequestException(ErrorMessages.ErrorUpdating);
 
-                return _response.Error();
+                return true;
             }
             catch (Exception ex)
             {
-                return _response.Error(ex.Message);
+                throw new BadRequestException(ex.Message);
             }
         }
     }

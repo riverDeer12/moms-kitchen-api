@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace MomsKitchen.API.Services
@@ -8,15 +9,15 @@ namespace MomsKitchen.API.Services
         where PostRequest : class
         where UpdateRequest : class
     {
-        Task<IServiceResponse<Entity>> GetAll();
+        Task<List<Entity>> GetAll();
 
-        Task<IServiceResponse<Entity>> Get(Guid entityId);
+        Task<Entity> Get(Guid entityId);
 
-        Task<IServiceResponse<Entity>> Delete(Guid entityId);
+        Task<bool> Delete(Guid entityId);
 
-        Task<IServiceResponse<Entity>> Create(PostRequest request);
+        Task<bool> Create(PostRequest request);
 
-        Task<IServiceResponse<Entity>> Update(Guid entityId, UpdateRequest request);
+        Task<bool> Update(Guid entityId, UpdateRequest request);
 
         Entity SetCreateProperties(Entity entity);
 

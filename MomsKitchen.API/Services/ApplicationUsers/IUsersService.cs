@@ -9,12 +9,12 @@ namespace MomsKitchen.API.Services.ApplicationUsers
 {
     public interface IUsersService
     {
-        Task<IServiceResponse<ApplicationUser>> GetUsers();
-        Task<IServiceResponse<ApplicationUser>> GetUser(Guid userId);
-        Task<IServiceResponse<ApplicationUser>> DeleteUser(Guid userId);
-        Task<IServiceResponse<ApplicationUser>> CreateUser(PostUserRequest request);
-        Task<IServiceResponse<ApplicationUser>> CreateAdmin(PostUserRequest request);
-        Task<IServiceResponse<ApplicationUser>> UpdateUser(Guid userId, UpdateUserRequest request);
-        Task<IServiceResponse<ApplicationUser>> GetByUserName(string username);
+        Task<List<ApplicationUserDetails>> GetUsers();
+        Task<ApplicationUserDetails> GetUser(Guid userId);
+        Task<bool> DeleteUser(Guid userId);
+        Task<bool> CreateUser(PostUserRequest request);
+        Task<bool> CreateAdmin(PostUserRequest request);
+        Task<bool> UpdateUser(Guid userId, UpdateUserRequest request);
+        Task<ApplicationUserDetails> GetByUserName(string username);
     }
 }

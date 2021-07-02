@@ -25,7 +25,6 @@ namespace MomsKitchen.API
             services.AddControllers();
             services.AddControllerServices();
             services.AddRepositories();
-            services.AddServiceResponses();
             services.AddSwaggerConfig();
             services.AddIdentityConfig();
             services.AddDbContextConfig(Configuration);

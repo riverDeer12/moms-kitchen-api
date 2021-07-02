@@ -34,13 +34,6 @@ namespace MomsKitchen.API.Extensions
             services.AddScoped<IAuthService, AuthService>();
         }
 
-        public static void AddServiceResponses(this IServiceCollection services)
-        {
-            services
-                .AddScoped(typeof(IServiceResponse<>),
-                typeof(ServiceResponse<>));
-        }
-
         public static void AddIdentityConfig(this IServiceCollection services)
         {
             services
