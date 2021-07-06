@@ -16,11 +16,13 @@ namespace MomsKitchen.API.Services.Recipes
         IMapper mapper,
         IAuthService authService):base(repository, mapper, authService){}
 
-        public async Task<List<RecipeDetails>> GetRecipes() 
+        public async Task<ICollection<RecipeDetails>> GetRecipes() 
         { 
             var recipes = await GetAll();
 
-            return _mapper.Map<List<RecipeDetails>>(recipes);
+            var recipeDetails = _mapper.Map<ICollection<RecipeDetails>>(recipes);
+
+            return recipeDetails;
         } 
 
         public async Task<RecipeDetails> GetRecipe(Guid recipeId)

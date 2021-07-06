@@ -33,7 +33,7 @@ namespace MomsKitchen.API.Services
 
         public async Task<Entity> Get(Guid entityId) => await _repository.Find(entityId);
 
-        public async Task<List<Entity>> GetAll() => await _repository.GetAll();
+        public async Task<ICollection<Entity>> GetAll() => await _repository.GetAll();
 
         public async Task<bool> Create(PostRequest request)
         {

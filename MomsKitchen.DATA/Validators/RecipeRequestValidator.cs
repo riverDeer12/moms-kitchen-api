@@ -7,11 +7,17 @@ namespace MomsKitchen.DATA.Validators
     {
         public RecipeRequestValidator()
         {
-            RuleFor(x => x.Name).NotEmpty()
+            RuleFor(x => x.Name)
+                .NotEmpty()
                 .WithMessage("Name is required.");
 
-            RuleFor(x => x.Description).NotNull()
+            RuleFor(x => x.Description)
+                .NotEmpty()
                 .WithMessage("Description is required");
+
+            RuleFor(x => x.ComplexityLevelId)
+                .NotEmpty()
+                .WithMessage("Complexity Level is required");
         }
     }
 }

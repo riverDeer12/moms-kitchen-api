@@ -6,7 +6,7 @@ namespace MomsKitchen.API.Repositories
 {
     public interface IRepository<Entity> where Entity: class
     {
-        Task<List<Entity>> GetAll();
+        Task<ICollection<Entity>> GetAll();
 
         Task<bool> Save();
 

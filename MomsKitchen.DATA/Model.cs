@@ -22,10 +22,13 @@ namespace MomsKitchen.DATA
         public DbSet<Recipe> Recipes { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<ComplexityLevel> ComplexityLevels { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            #region Identity 
 
             modelBuilder
                 .Entity<IdentityUser>(entity =>
@@ -73,6 +76,9 @@ namespace MomsKitchen.DATA
                     entity.ToTable("UserTokens");
                 });
 
+            #endregion
+
+            #region Recipe Categories
 
             modelBuilder.Entity<RecipeCategory>(entity =>
             {
@@ -90,12 +96,27 @@ namespace MomsKitchen.DATA
                 .WithMany(category => category.Recipes)
                 .HasForeignKey(categoryItem => categoryItem.CategoryId);
 
+            #endregion
+
+            #region Complexity Level
+
+            modelBuilder.Entity<ComplexityLevel>()
+                .HasMany(c => c.Recipes)
+                .WithOne(e => e.ComplexityLevel);
+
+            #endregion
+
+            #region Seeding
 
             modelBuilder.Entity<IdentityRole>().HasData(Roles);
 
             modelBuilder.Entity<ApplicationUser>().HasData(GenerateSuperAdmin());
 
             modelBuilder.Entity<IdentityUserRole<string>>().HasData(UserRoles);
+
+            modelBuilder.Entity<ComplexityLevel>().HasData(DefaultComplexityLevels);
+
+            #endregion
         }
 
         private static List<IdentityRole> Roles => new()
@@ -107,7 +128,7 @@ namespace MomsKitchen.DATA
 
         private static List<IdentityUserRole<string>> UserRoles => new()
         {
-            new IdentityUserRole<string>{ UserId = SUPERADMIN_ID, RoleId = SUPERADMIN_ROLE_ID }
+            new IdentityUserRole<string> { UserId = SUPERADMIN_ID, RoleId = SUPERADMIN_ROLE_ID }
         };
 
         private static ApplicationUser GenerateSuperAdmin()
@@ -140,5 +161,65 @@ namespace MomsKitchen.DATA
 
             return superAdmin;
         }
+
+        private static List<ComplexityLevel> DefaultComplexityLevels => new()
+        {
+            new ComplexityLevel
+            {
+                Id = Guid.NewGuid(),
+                Name = "Low",
+                Description = "Meals that can be made with minimal effort.",
+                ComplexityWeight = 1,
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
+                ActivityUpdatedAt = DateTime.Now,
+                UpdatedBy = Guid.Parse(SUPERADMIN_ID),
+                CreatedBy = Guid.Parse(SUPERADMIN_ID),
+                ActivityUpdatedBy = Guid.Parse(SUPERADMIN_ID),
+                IsActive = true,
+            },
+            new ComplexityLevel
+            {
+                Id = Guid.NewGuid(),
+                Name = "Normal",
+                Description = "Meals that require effort.",
+                ComplexityWeight = 2,
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
+                ActivityUpdatedAt = DateTime.Now,
+                UpdatedBy = Guid.Parse(SUPERADMIN_ID),
+                CreatedBy = Guid.Parse(SUPERADMIN_ID),
+                ActivityUpdatedBy = Guid.Parse(SUPERADMIN_ID),
+                IsActive = true,
+            },
+            new ComplexityLevel
+            {
+                Id = Guid.NewGuid(),
+                Name = "Complex",
+                Description = "Meals that require extra cooking knowledge.",
+                ComplexityWeight = 3,
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
+                ActivityUpdatedAt = DateTime.Now,
+                UpdatedBy = Guid.Parse(SUPERADMIN_ID),
+                CreatedBy = Guid.Parse(SUPERADMIN_ID),
+                ActivityUpdatedBy = Guid.Parse(SUPERADMIN_ID),
+                IsActive = true,
+            },
+            new ComplexityLevel
+            {
+                Id = Guid.NewGuid(),
+                Name = "VeryComplex",
+                Description = "Meals that require special cooking skills.",
+                ComplexityWeight = 4,
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
+                ActivityUpdatedAt = DateTime.Now,
+                UpdatedBy = Guid.Parse(SUPERADMIN_ID),
+                CreatedBy = Guid.Parse(SUPERADMIN_ID),
+                ActivityUpdatedBy = Guid.Parse(SUPERADMIN_ID),
+                IsActive = true,
+            },
+        };
     }
 }

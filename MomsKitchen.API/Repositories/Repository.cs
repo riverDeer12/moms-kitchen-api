@@ -45,7 +45,7 @@ namespace MomsKitchen.API.Repositories
             return entity;
         }
 
-        public async Task<List<Entity>> GetAll()
+        public async Task<ICollection<Entity>> GetAll()
         {
             return await _db.Set<Entity>().ToListAsync();
         }

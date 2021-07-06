@@ -12,4 +12,3 @@ C:\_projects\moms-kitchen-api\MomsKitchen.DATA\obj\Debug\net5.0\MomsKitchen.DATA
 C:\_projects\moms-kitchen-api\MomsKitchen.DATA\bin\Debug\net5.0\MomsKitchen.DATA.runtimeconfig.json
 C:\_projects\moms-kitchen-api\MomsKitchen.DATA\bin\Debug\net5.0\MomsKitchen.DATA.runtimeconfig.dev.json
 C:\_projects\moms-kitchen-api\MomsKitchen.DATA\obj\Debug\net5.0\MomsKitchen.DATA.genruntimeconfig.cache
-C:\_projects\moms-kitchen-api\MomsKitchen.DATA\obj\Debug\net5.0\MomsKitchen.DATA.csprojAssemblyReference.cache

@@ -7,7 +7,7 @@ namespace MomsKitchen.API.Services
 {
     public interface IRecipesService
     {
-        Task<List<RecipeDetails>> GetRecipes();
+        Task<ICollection<RecipeDetails>> GetRecipes();
         Task<RecipeDetails> GetRecipe(Guid recipeId);
         Task<bool> DeleteRecipe(Guid recipeId);
         Task<bool> CreateRecipe(RecipeRequest request);

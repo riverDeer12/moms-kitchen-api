@@ -1,3 +1,4 @@
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -22,16 +23,16 @@ namespace MomsKitchen.API
         {
 
             services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
-            services.AddControllers();
+            services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
+            services.AddValidators();
             services.AddControllerServices();
+            services.AddControllers().AddFluentValidation();
             services.AddRepositories();
+            services.AddCors();
             services.AddSwaggerConfig();
             services.AddIdentityConfig();
             services.AddDbContextConfig(Configuration);
-            services.AddCors();
-            services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
             services.AddAuthorization();
-            services.AddValidators();
             services.ConfigureAuthentication(Configuration);
         }
 

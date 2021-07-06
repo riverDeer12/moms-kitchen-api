@@ -9,6 +9,6 @@ namespace MomsKitchen.DATA.Entities
 
         public string Description { get; set; }
 
-        public IList<RecipeCategory> Recipes { get; set; }
+        public  ICollection<RecipeCategory> Recipes { get; set; }
     }
 }

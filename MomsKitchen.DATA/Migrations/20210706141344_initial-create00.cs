@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MomsKitchen.DATA.Migrations
 {
-    public partial class InitialCreate00 : Migration
+    public partial class initialcreate00 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -31,12 +31,13 @@ namespace MomsKitchen.DATA.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Recipes",
+                name: "ComplexityLevels",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ComplexityWeight = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -50,7 +51,7 @@ namespace MomsKitchen.DATA.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Recipes", x => x.Id);
+                    table.PrimaryKey("PK_ComplexityLevels", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -103,27 +104,33 @@ namespace MomsKitchen.DATA.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RecipeCategories",
+                name: "Recipes",
                 columns: table => new
                 {
-                    RecipeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ComplexityLevelId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    ActivityUpdatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ActivityUpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RecipeCategories", x => new { x.RecipeId, x.CategoryId });
+                    table.PrimaryKey("PK_Recipes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_RecipeCategories_Categories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Categories",
+                        name: "FK_Recipes_ComplexityLevels_ComplexityLevelId",
+                        column: x => x.ComplexityLevelId,
+                        principalTable: "ComplexityLevels",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_RecipeCategories_Recipes_RecipeId",
-                        column: x => x.RecipeId,
-                        principalTable: "Recipes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -232,20 +239,55 @@ namespace MomsKitchen.DATA.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "RecipeCategories",
+                columns: table => new
+                {
+                    RecipeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RecipeCategories", x => new { x.RecipeId, x.CategoryId });
+                    table.ForeignKey(
+                        name: "FK_RecipeCategories_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_RecipeCategories_Recipes_RecipeId",
+                        column: x => x.RecipeId,
+                        principalTable: "Recipes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "ComplexityLevels",
+                columns: new[] { "Id", "ActivityUpdatedAt", "ActivityUpdatedBy", "ComplexityWeight", "CreatedAt", "CreatedBy", "DeletedAt", "DeletedBy", "Description", "IsActive", "IsDeleted", "Name", "UpdatedAt", "UpdatedBy" },
+                values: new object[,]
+                {
+                    { new Guid("9579ec34-7b18-43d5-8726-0faf1cb97d03"), new DateTime(2021, 7, 6, 16, 13, 44, 92, DateTimeKind.Local).AddTicks(6442), new Guid("cd75a482-cac0-45f2-9c20-bae54f363742"), 1, new DateTime(2021, 7, 6, 16, 13, 44, 92, DateTimeKind.Local).AddTicks(5766), new Guid("cd75a482-cac0-45f2-9c20-bae54f363742"), null, null, "Meals that can be made with minimal effort.", true, false, "Low", new DateTime(2021, 7, 6, 16, 13, 44, 92, DateTimeKind.Local).AddTicks(6137), new Guid("cd75a482-cac0-45f2-9c20-bae54f363742") },
+                    { new Guid("77e8cefa-b520-48aa-9347-761fcad33252"), new DateTime(2021, 7, 6, 16, 13, 44, 92, DateTimeKind.Local).AddTicks(8066), new Guid("cd75a482-cac0-45f2-9c20-bae54f363742"), 2, new DateTime(2021, 7, 6, 16, 13, 44, 92, DateTimeKind.Local).AddTicks(8050), new Guid("cd75a482-cac0-45f2-9c20-bae54f363742"), null, null, "Meals that require effort.", true, false, "Normal", new DateTime(2021, 7, 6, 16, 13, 44, 92, DateTimeKind.Local).AddTicks(8062), new Guid("cd75a482-cac0-45f2-9c20-bae54f363742") },
+                    { new Guid("3f6e86b6-7d3e-4a75-a1f1-58b30aebcba3"), new DateTime(2021, 7, 6, 16, 13, 44, 92, DateTimeKind.Local).AddTicks(8089), new Guid("cd75a482-cac0-45f2-9c20-bae54f363742"), 3, new DateTime(2021, 7, 6, 16, 13, 44, 92, DateTimeKind.Local).AddTicks(8083), new Guid("cd75a482-cac0-45f2-9c20-bae54f363742"), null, null, "Meals that require extra cooking knowledge.", true, false, "Complex", new DateTime(2021, 7, 6, 16, 13, 44, 92, DateTimeKind.Local).AddTicks(8086), new Guid("cd75a482-cac0-45f2-9c20-bae54f363742") },
+                    { new Guid("3aec7e7b-24df-4964-8e44-5f52cfc39ec3"), new DateTime(2021, 7, 6, 16, 13, 44, 92, DateTimeKind.Local).AddTicks(8103), new Guid("cd75a482-cac0-45f2-9c20-bae54f363742"), 4, new DateTime(2021, 7, 6, 16, 13, 44, 92, DateTimeKind.Local).AddTicks(8098), new Guid("cd75a482-cac0-45f2-9c20-bae54f363742"), null, null, "Meals that require special cooking skills.", true, false, "VeryComplex", new DateTime(2021, 7, 6, 16, 13, 44, 92, DateTimeKind.Local).AddTicks(8100), new Guid("cd75a482-cac0-45f2-9c20-bae54f363742") }
+                });
+
             migrationBuilder.InsertData(
                 table: "Roles",
                 columns: new[] { "RoleId", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "69a4116d-b1bd-4f0b-b6a7-a13bb5eb639f", "ce482490-a38d-4a0c-99fe-3685514ad6d0", "SuperAdmin", "SUPERADMIN" },
-                    { "a1897ddf-24d5-43cb-af30-1e8425003eae", "178a8bb5-68e5-497d-851e-18dd5b6a1f0b", "Admin", "ADMIN" },
-                    { "2e275270-0e64-4926-905e-70a2fab92006", "b210bbc8-5823-4e5d-9578-2bd63f7a3a5d", "User", "USER" }
+                    { "69a4116d-b1bd-4f0b-b6a7-a13bb5eb639f", "738d3523-d662-4078-879a-0f1c9dd8371a", "SuperAdmin", "SUPERADMIN" },
+                    { "a1897ddf-24d5-43cb-af30-1e8425003eae", "197060b1-8b67-4307-adc1-87dd4a7b4684", "Admin", "ADMIN" },
+                    { "2e275270-0e64-4926-905e-70a2fab92006", "1d62cdef-763e-45ba-b8a2-d5911e0b4a1a", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "UserId", "AccessFailedCount", "ActivityUpdatedAt", "ActivityUpdatedBy", "ConcurrencyStamp", "CreatedAt", "CreatedBy", "Discriminator", "Email", "EmailConfirmed", "FirstName", "IsActive", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UpdatedAt", "UpdatedBy", "UserName" },
-                values: new object[] { "cd75a482-cac0-45f2-9c20-bae54f363742", 0, new DateTime(2021, 6, 30, 12, 27, 12, 421, DateTimeKind.Local).AddTicks(9148), new Guid("cd75a482-cac0-45f2-9c20-bae54f363742"), "c90d3ae1-301f-4881-9073-1976d620e8cd", new DateTime(2021, 6, 30, 12, 27, 12, 418, DateTimeKind.Local).AddTicks(7928), new Guid("cd75a482-cac0-45f2-9c20-bae54f363742"), "ApplicationUser", "superadmin@gmail.com", false, "Super", true, "Admin", false, null, "SUPERADMIN@GMAIL.COM", "SUPERADMIN", "AQAAAAEAACcQAAAAEBZsPZA9PxTNwcoWRDqFfyXkf2vMcj55ZgFd8petutS8fSTxTIvPlZt++pbKLji09g==", "+385915007122", false, "42d3ee12-0253-4847-9239-8e3784a867c5", true, new DateTime(2021, 6, 30, 12, 27, 12, 421, DateTimeKind.Local).AddTicks(8368), new Guid("cd75a482-cac0-45f2-9c20-bae54f363742"), "superadmin" });
+                values: new object[] { "cd75a482-cac0-45f2-9c20-bae54f363742", 0, new DateTime(2021, 7, 6, 16, 13, 44, 75, DateTimeKind.Local).AddTicks(4930), new Guid("cd75a482-cac0-45f2-9c20-bae54f363742"), "fc1c805f-16e9-4d89-a62b-8feddc268c48", new DateTime(2021, 7, 6, 16, 13, 44, 71, DateTimeKind.Local).AddTicks(7891), new Guid("cd75a482-cac0-45f2-9c20-bae54f363742"), "ApplicationUser", "superadmin@gmail.com", false, "Super", true, "Admin", false, null, "SUPERADMIN@GMAIL.COM", "SUPERADMIN", "AQAAAAEAACcQAAAAEHC/ZED7eBb+Ggtlvm2H4LMK1hN9aVCahX7koginK5g3sb2Ph6rm+O7Q0TJQJK7qsA==", "+385915007122", false, "adfed03a-5aea-496f-a783-8602022d2aae", true, new DateTime(2021, 7, 6, 16, 13, 44, 75, DateTimeKind.Local).AddTicks(4421), new Guid("cd75a482-cac0-45f2-9c20-bae54f363742"), "superadmin" });
 
             migrationBuilder.InsertData(
                 table: "UserRoles",
@@ -256,6 +298,11 @@ namespace MomsKitchen.DATA.Migrations
                 name: "IX_RecipeCategories_CategoryId",
                 table: "RecipeCategories",
                 column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Recipes_ComplexityLevelId",
+                table: "Recipes",
+                column: "ComplexityLevelId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RoleClaims_RoleId",
@@ -328,6 +375,9 @@ namespace MomsKitchen.DATA.Migrations
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "ComplexityLevels");
         }
     }
 }

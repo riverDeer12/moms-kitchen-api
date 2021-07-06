@@ -10,8 +10,8 @@ using MomsKitchen.DATA;
 namespace MomsKitchen.DATA.Migrations
 {
     [DbContext(typeof(Model))]
-    [Migration("20210630102712_InitialCreate00")]
-    partial class InitialCreate00
+    [Migration("20210706141344_initial-create00")]
+    partial class initialcreate00
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -52,21 +52,21 @@ namespace MomsKitchen.DATA.Migrations
                         new
                         {
                             Id = "69a4116d-b1bd-4f0b-b6a7-a13bb5eb639f",
-                            ConcurrencyStamp = "ce482490-a38d-4a0c-99fe-3685514ad6d0",
+                            ConcurrencyStamp = "738d3523-d662-4078-879a-0f1c9dd8371a",
                             Name = "SuperAdmin",
                             NormalizedName = "SUPERADMIN"
                         },
                         new
                         {
                             Id = "a1897ddf-24d5-43cb-af30-1e8425003eae",
-                            ConcurrencyStamp = "178a8bb5-68e5-497d-851e-18dd5b6a1f0b",
+                            ConcurrencyStamp = "197060b1-8b67-4307-adc1-87dd4a7b4684",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "2e275270-0e64-4926-905e-70a2fab92006",
-                            ConcurrencyStamp = "b210bbc8-5823-4e5d-9578-2bd63f7a3a5d",
+                            ConcurrencyStamp = "1d62cdef-763e-45ba-b8a2-d5911e0b4a1a",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -308,6 +308,118 @@ namespace MomsKitchen.DATA.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("MomsKitchen.DATA.Entities.ComplexityLevel", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("ActivityUpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("ActivityUpdatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("ComplexityWeight")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ComplexityLevels");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("9579ec34-7b18-43d5-8726-0faf1cb97d03"),
+                            ActivityUpdatedAt = new DateTime(2021, 7, 6, 16, 13, 44, 92, DateTimeKind.Local).AddTicks(6442),
+                            ActivityUpdatedBy = new Guid("cd75a482-cac0-45f2-9c20-bae54f363742"),
+                            ComplexityWeight = 1,
+                            CreatedAt = new DateTime(2021, 7, 6, 16, 13, 44, 92, DateTimeKind.Local).AddTicks(5766),
+                            CreatedBy = new Guid("cd75a482-cac0-45f2-9c20-bae54f363742"),
+                            Description = "Meals that can be made with minimal effort.",
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Low",
+                            UpdatedAt = new DateTime(2021, 7, 6, 16, 13, 44, 92, DateTimeKind.Local).AddTicks(6137),
+                            UpdatedBy = new Guid("cd75a482-cac0-45f2-9c20-bae54f363742")
+                        },
+                        new
+                        {
+                            Id = new Guid("77e8cefa-b520-48aa-9347-761fcad33252"),
+                            ActivityUpdatedAt = new DateTime(2021, 7, 6, 16, 13, 44, 92, DateTimeKind.Local).AddTicks(8066),
+                            ActivityUpdatedBy = new Guid("cd75a482-cac0-45f2-9c20-bae54f363742"),
+                            ComplexityWeight = 2,
+                            CreatedAt = new DateTime(2021, 7, 6, 16, 13, 44, 92, DateTimeKind.Local).AddTicks(8050),
+                            CreatedBy = new Guid("cd75a482-cac0-45f2-9c20-bae54f363742"),
+                            Description = "Meals that require effort.",
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Normal",
+                            UpdatedAt = new DateTime(2021, 7, 6, 16, 13, 44, 92, DateTimeKind.Local).AddTicks(8062),
+                            UpdatedBy = new Guid("cd75a482-cac0-45f2-9c20-bae54f363742")
+                        },
+                        new
+                        {
+                            Id = new Guid("3f6e86b6-7d3e-4a75-a1f1-58b30aebcba3"),
+                            ActivityUpdatedAt = new DateTime(2021, 7, 6, 16, 13, 44, 92, DateTimeKind.Local).AddTicks(8089),
+                            ActivityUpdatedBy = new Guid("cd75a482-cac0-45f2-9c20-bae54f363742"),
+                            ComplexityWeight = 3,
+                            CreatedAt = new DateTime(2021, 7, 6, 16, 13, 44, 92, DateTimeKind.Local).AddTicks(8083),
+                            CreatedBy = new Guid("cd75a482-cac0-45f2-9c20-bae54f363742"),
+                            Description = "Meals that require extra cooking knowledge.",
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Complex",
+                            UpdatedAt = new DateTime(2021, 7, 6, 16, 13, 44, 92, DateTimeKind.Local).AddTicks(8086),
+                            UpdatedBy = new Guid("cd75a482-cac0-45f2-9c20-bae54f363742")
+                        },
+                        new
+                        {
+                            Id = new Guid("3aec7e7b-24df-4964-8e44-5f52cfc39ec3"),
+                            ActivityUpdatedAt = new DateTime(2021, 7, 6, 16, 13, 44, 92, DateTimeKind.Local).AddTicks(8103),
+                            ActivityUpdatedBy = new Guid("cd75a482-cac0-45f2-9c20-bae54f363742"),
+                            ComplexityWeight = 4,
+                            CreatedAt = new DateTime(2021, 7, 6, 16, 13, 44, 92, DateTimeKind.Local).AddTicks(8098),
+                            CreatedBy = new Guid("cd75a482-cac0-45f2-9c20-bae54f363742"),
+                            Description = "Meals that require special cooking skills.",
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "VeryComplex",
+                            UpdatedAt = new DateTime(2021, 7, 6, 16, 13, 44, 92, DateTimeKind.Local).AddTicks(8100),
+                            UpdatedBy = new Guid("cd75a482-cac0-45f2-9c20-bae54f363742")
+                        });
+                });
+
             modelBuilder.Entity("MomsKitchen.DATA.Entities.Recipe", b =>
                 {
                     b.Property<Guid>("Id")
@@ -318,6 +430,9 @@ namespace MomsKitchen.DATA.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<Guid?>("ActivityUpdatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ComplexityLevelId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
@@ -351,6 +466,8 @@ namespace MomsKitchen.DATA.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ComplexityLevelId");
 
                     b.ToTable("Recipes");
                 });
@@ -408,26 +525,26 @@ namespace MomsKitchen.DATA.Migrations
                         {
                             Id = "cd75a482-cac0-45f2-9c20-bae54f363742",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c90d3ae1-301f-4881-9073-1976d620e8cd",
+                            ConcurrencyStamp = "fc1c805f-16e9-4d89-a62b-8feddc268c48",
                             Email = "superadmin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPERADMIN@GMAIL.COM",
                             NormalizedUserName = "SUPERADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBZsPZA9PxTNwcoWRDqFfyXkf2vMcj55ZgFd8petutS8fSTxTIvPlZt++pbKLji09g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHC/ZED7eBb+Ggtlvm2H4LMK1hN9aVCahX7koginK5g3sb2Ph6rm+O7Q0TJQJK7qsA==",
                             PhoneNumber = "+385915007122",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "42d3ee12-0253-4847-9239-8e3784a867c5",
+                            SecurityStamp = "adfed03a-5aea-496f-a783-8602022d2aae",
                             TwoFactorEnabled = true,
                             UserName = "superadmin",
-                            ActivityUpdatedAt = new DateTime(2021, 6, 30, 12, 27, 12, 421, DateTimeKind.Local).AddTicks(9148),
+                            ActivityUpdatedAt = new DateTime(2021, 7, 6, 16, 13, 44, 75, DateTimeKind.Local).AddTicks(4930),
                             ActivityUpdatedBy = new Guid("cd75a482-cac0-45f2-9c20-bae54f363742"),
-                            CreatedAt = new DateTime(2021, 6, 30, 12, 27, 12, 418, DateTimeKind.Local).AddTicks(7928),
+                            CreatedAt = new DateTime(2021, 7, 6, 16, 13, 44, 71, DateTimeKind.Local).AddTicks(7891),
                             CreatedBy = new Guid("cd75a482-cac0-45f2-9c20-bae54f363742"),
                             FirstName = "Super",
                             IsActive = true,
                             LastName = "Admin",
-                            UpdatedAt = new DateTime(2021, 6, 30, 12, 27, 12, 421, DateTimeKind.Local).AddTicks(8368),
+                            UpdatedAt = new DateTime(2021, 7, 6, 16, 13, 44, 75, DateTimeKind.Local).AddTicks(4421),
                             UpdatedBy = new Guid("cd75a482-cac0-45f2-9c20-bae54f363742")
                         });
                 });
@@ -483,6 +600,15 @@ namespace MomsKitchen.DATA.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("MomsKitchen.DATA.Entities.Recipe", b =>
+                {
+                    b.HasOne("MomsKitchen.DATA.Entities.ComplexityLevel", "ComplexityLevel")
+                        .WithMany("Recipes")
+                        .HasForeignKey("ComplexityLevelId");
+
+                    b.Navigation("ComplexityLevel");
+                });
+
             modelBuilder.Entity("MomsKitchen.DATA.Entities.RecipeCategory", b =>
                 {
                     b.HasOne("MomsKitchen.DATA.Entities.Category", "Category")
@@ -503,6 +629,11 @@ namespace MomsKitchen.DATA.Migrations
                 });
 
             modelBuilder.Entity("MomsKitchen.DATA.Entities.Category", b =>
+                {
+                    b.Navigation("Recipes");
+                });
+
+            modelBuilder.Entity("MomsKitchen.DATA.Entities.ComplexityLevel", b =>
                 {
                     b.Navigation("Recipes");
                 });

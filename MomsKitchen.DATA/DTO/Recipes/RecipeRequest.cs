@@ -1,3 +1,5 @@
+using System;
+
 namespace MomsKitchen.DATA.DTO.Recipes
 {
     public class RecipeRequest
@@ -7,5 +9,7 @@ namespace MomsKitchen.DATA.DTO.Recipes
         public string Name { get; set; }
 
         public string Description { get; set; }
+
+        public Guid ComplexityLevelId { get; set; }
     }
 }

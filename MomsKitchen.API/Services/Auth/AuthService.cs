@@ -23,19 +23,15 @@ namespace MomsKitchen.API.Services.Auth
 
         private readonly ApplicationSettings _appSettings;
 
-        private readonly IAuthService _authService;
-
         public AuthService(
             IOptions<ApplicationSettings> appSettings,
             UserManager<ApplicationUser> userManager,
-            IHttpContextAccessor httpContextAccessor,
-            IAuthService authService
+            IHttpContextAccessor httpContextAccessor
         )
         {
             _httpContextAccessor = httpContextAccessor;
             _appSettings = appSettings.Value;
             _userManager = userManager;
-            _authService = authService;
         }
 
         public Guid? GetLoggedUserId()
@@ -68,7 +64,7 @@ namespace MomsKitchen.API.Services.Auth
             if (!validUser)
                 throw new BadHttpRequestException(ErrorMessages.ValidationError);
 
-            var token = await _authService.GenerateJwtToken(user);
+            var token = await GenerateJwtToken(user);
 
             return new { token };
         }

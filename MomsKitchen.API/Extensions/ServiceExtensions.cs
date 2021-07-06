@@ -30,9 +30,7 @@ namespace MomsKitchen.API.Extensions
             this IServiceCollection services
         )
         {
-            services
-                .AddScoped(typeof(IControllerService<,,>),
-                typeof(ControllerService<,,>));
+            services.AddScoped(typeof(IControllerService<,,>), typeof(ControllerService<,,>));
             services.AddScoped<IRecipesService, RecipesService>();
             services.AddScoped<ICategoriesService, CategoriesService>();
             services.AddScoped<IUsersService, UsersService>();

@@ -9,7 +9,7 @@ namespace MomsKitchen.API.Services
         where PostRequest : class
         where UpdateRequest : class
     {
-        Task<List<Entity>> GetAll();
+        Task<ICollection<Entity>> GetAll();
 
         Task<Entity> Get(Guid entityId);
 

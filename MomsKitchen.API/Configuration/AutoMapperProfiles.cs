@@ -18,7 +18,7 @@ namespace MomsKitchen.API.Configuration
             /// <typeparam name="Recipe"></typeparam>
             /// <returns></returns>
             CreateMap<RecipeRequest, Recipe>();
-            CreateMap<RecipeDetails, Recipe>();
+            CreateMap<Recipe, RecipeDetails>();
 
             /// <summary>
             /// Category mappers.
@@ -28,7 +28,7 @@ namespace MomsKitchen.API.Configuration
             /// <typeparam name="Category"></typeparam>
             /// <returns></returns>
             CreateMap<CategoryRequest, Category>();
-            CreateMap<CategoryDetails, Category>();
+            CreateMap<Category, CategoryDetails>();
 
             /// <summary>
             /// Application user mappers.
@@ -38,7 +38,7 @@ namespace MomsKitchen.API.Configuration
             /// <typeparam name="ApplicationUser"></typeparam>
             /// <returns></returns>
             CreateMap<UserRequest, ApplicationUser>();
-            CreateMap<ApplicationUserDetails, ApplicationUser>();
+            CreateMap<ApplicationUser, ApplicationUserDetails>();
         }
     }
 }
