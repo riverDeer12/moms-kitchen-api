@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace MomsKitchen.API.Services.ApplicationUsers
 {
-    public class UsersService: ControllerService<ApplicationUser, PostUserRequest, UpdateUserRequest>, IUsersService
+    public class UsersService: ControllerService<ApplicationUser, UserRequest, UserRequest>, IUsersService
     {
         private readonly UserManager<ApplicationUser> _userManager;
 
@@ -51,7 +51,7 @@ namespace MomsKitchen.API.Services.ApplicationUsers
             return _mapper.Map<ApplicationUserDetails>(user);
         }
 
-        public async Task<bool> CreateUser(PostUserRequest request)
+        public async Task<bool> CreateUser(UserRequest request)
         {
             var userData = _mapper.Map<ApplicationUser>(request);
 
@@ -75,7 +75,7 @@ namespace MomsKitchen.API.Services.ApplicationUsers
             }
         }
 
-        public async Task<bool> CreateAdmin(PostUserRequest request)
+        public async Task<bool> CreateAdmin(UserRequest request)
         {
             var userData = _mapper.Map<ApplicationUser>(request);
 
@@ -98,7 +98,7 @@ namespace MomsKitchen.API.Services.ApplicationUsers
             }
         }
 
-        public async Task<bool> UpdateUser(Guid userId, UpdateUserRequest request)
+        public async Task<bool> UpdateUser(Guid userId, UserRequest request)
         {
             var user = await _userManager.FindByIdAsync(userId.ToString());
 

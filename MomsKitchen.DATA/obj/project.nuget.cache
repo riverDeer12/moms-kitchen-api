@@ -1,9 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "iVAfli7LJBzsJFNko9FXmQzgivCsofXXwh9h7wUuLDYpCi3+h2H0MVHRzAjqKBHUhZ2gRBcJMv5o83ES1vkLdg==",
+  "dgSpecHash": "cNIYvgvMwrtXnhsB43+RrO9w5PLQKFPZEZ86qwohcF8RuSHHoCrcEC6iiXHvId75mjF2k0XTAhpbdaeT1h+rIg==",
   "success": true,
   "projectFilePath": "C:\\_projects\\moms-kitchen-api\\MomsKitchen.DATA\\MomsKitchen.DATA.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Milan\\.nuget\\packages\\fluentvalidation\\10.2.3\\fluentvalidation.10.2.3.nupkg.sha512",
+    "C:\\Users\\Milan\\.nuget\\packages\\fluentvalidation.aspnetcore\\10.2.3\\fluentvalidation.aspnetcore.10.2.3.nupkg.sha512",
+    "C:\\Users\\Milan\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\10.2.3\\fluentvalidation.dependencyinjectionextensions.10.2.3.nupkg.sha512",
     "C:\\Users\\Milan\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Milan\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
     "C:\\Users\\Milan\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",

@@ -1,5 +1,6 @@
 using System;
 using System.Text;
+using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -15,7 +16,11 @@ using MomsKitchen.API.Services.Auth;
 using MomsKitchen.API.Services.Categories;
 using MomsKitchen.API.Services.Recipes;
 using MomsKitchen.DATA;
+using MomsKitchen.DATA.DTO.ApplicationUsers;
+using MomsKitchen.DATA.DTO.Categories;
+using MomsKitchen.DATA.DTO.Recipes;
 using MomsKitchen.DATA.Entities;
+using MomsKitchen.DATA.Validators;
 
 namespace MomsKitchen.API.Extensions
 {
@@ -129,6 +134,13 @@ namespace MomsKitchen.API.Extensions
                     options
                         .UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
                 });
+        }
+
+        public static void AddValidators(this IServiceCollection services)
+        {
+            services.AddTransient<IValidator<UserRequest>, UserRequestValidator>();
+            services.AddTransient<IValidator<RecipeRequest>, RecipeRequestValidator>();
+            services.AddTransient<IValidator<CategoryRequest>, CategoryRequestValidator>();
         }
     }
 }

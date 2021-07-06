@@ -1,6 +1,6 @@
 namespace MomsKitchen.DATA.DTO.Recipes
 {
-    public class UpdateRecipeRequest
+    public class RecipeRequest
     {
         public bool IsActive { get; set; }
 

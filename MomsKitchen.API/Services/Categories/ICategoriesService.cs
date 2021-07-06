@@ -11,7 +11,7 @@ namespace MomsKitchen.API.Services
         Task<List<CategoryDetails>> GetCategories();
         Task<CategoryDetails> GetCategory(Guid categoryId);
         Task<bool> DeleteCategory(Guid categoryId);
-        Task<bool> CreateCategory(PostCategoryRequest request);
-        Task<bool> UpdateCategory(Guid categoryId, UpdateCategoryRequest request); 
+        Task<bool> CreateCategory(CategoryRequest request);
+        Task<bool> UpdateCategory(Guid categoryId, CategoryRequest request); 
     }
 }

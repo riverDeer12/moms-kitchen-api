@@ -9,7 +9,7 @@ using MomsKitchen.DATA.Entities;
 
 namespace MomsKitchen.API.Services.Categories
 {
-    public class CategoriesService : ControllerService<Category, PostCategoryRequest, UpdateCategoryRequest>, ICategoriesService
+    public class CategoriesService : ControllerService<Category, CategoryRequest, CategoryRequest>, ICategoriesService
     {
         public CategoriesService(
         IRepository<Category> repository,
@@ -32,8 +32,8 @@ namespace MomsKitchen.API.Services.Categories
 
         public async Task<bool> DeleteCategory(Guid categoryId) => await Delete(categoryId);
 
-        public async Task<bool> CreateCategory(PostCategoryRequest request) => await Create(request);
+        public async Task<bool> CreateCategory(CategoryRequest request) => await Create(request);
 
-        public async Task<bool> UpdateCategory(Guid categoryId, UpdateCategoryRequest request) => await Update(categoryId, request);
+        public async Task<bool> UpdateCategory(Guid categoryId, CategoryRequest request) => await Update(categoryId, request);
     }
 }

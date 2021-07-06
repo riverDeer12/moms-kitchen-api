@@ -23,16 +23,12 @@ namespace MomsKitchen.API.Controllers
 
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> Login(LoginRequest request)
-        {
-            return Ok(await _authService.CheckUser(request));
-        }
+        public async Task<IActionResult> Login(LoginRequest request) 
+            => Ok(await _authService.CheckUser(request));
 
         [HttpPost]
         [Route("register")]
-        public async Task<IActionResult> Register(PostUserRequest request)
-        {
-            return Ok(await _usersService.CreateUser(request));
-        }
+        public async Task<IActionResult> Register(UserRequest request) 
+            => Ok(await _usersService.CreateUser(request));
     }
 }

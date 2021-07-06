@@ -72,3 +72,6 @@ C:\_projects\moms-kitchen-api\MomsKitchen.API\bin\Debug\net5.0\MomsKitchen.DATA.
 C:\_projects\moms-kitchen-api\MomsKitchen.API\bin\Debug\net5.0\MomsKitchen.DATA.pdb
 C:\_projects\moms-kitchen-api\MomsKitchen.API\bin\Debug\net5.0\Humanizer.dll
 C:\_projects\moms-kitchen-api\MomsKitchen.API\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\_projects\moms-kitchen-api\MomsKitchen.API\bin\Debug\net5.0\FluentValidation.dll
+C:\_projects\moms-kitchen-api\MomsKitchen.API\bin\Debug\net5.0\FluentValidation.AspNetCore.dll
+C:\_projects\moms-kitchen-api\MomsKitchen.API\bin\Debug\net5.0\FluentValidation.DependencyInjectionExtensions.dll

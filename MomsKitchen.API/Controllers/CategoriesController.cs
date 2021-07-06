@@ -18,36 +18,26 @@ namespace MomsKitchen.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
-        {
-            return Ok(await _categoriesService.GetCategories());
-        }
+        public async Task<IActionResult> Get() 
+            => Ok(await _categoriesService.GetCategories());
 
         [HttpGet]
         [Route("{categoryId}")]
-        public async Task<IActionResult> Get([FromRoute] Guid categoryId)
-        {
-            return Ok(await _categoriesService.GetCategory(categoryId));
-        }
+        public async Task<IActionResult> Get([FromRoute] Guid categoryId) 
+            => Ok(await _categoriesService.GetCategory(categoryId));
 
         [HttpPost]
-        public async Task<IActionResult> Post(PostCategoryRequest request)
-        {
-            return Ok(await _categoriesService.CreateCategory(request));
-        }
+        public async Task<IActionResult> Post(CategoryRequest request) 
+            => Ok(await _categoriesService.CreateCategory(request));
 
         [HttpPut]
         [Route("{categoryId}")]
-        public async Task<IActionResult> Put([FromRoute] Guid categoryId, UpdateCategoryRequest request)
-        {
-            return Ok(await _categoriesService.UpdateCategory(categoryId, request));
-        }
+        public async Task<IActionResult> Put([FromRoute] Guid categoryId, CategoryRequest request) 
+            => Ok(await _categoriesService.UpdateCategory(categoryId, request));
 
         [HttpDelete]
         [Route("{categoryId}")]
         public async Task<IActionResult> Delete([FromRoute] Guid categoryId)
-        {
-            return Ok(await _categoriesService.DeleteCategory(categoryId));
-        }
+            => Ok(await _categoriesService.DeleteCategory(categoryId));
     }
 }

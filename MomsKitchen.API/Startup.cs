@@ -31,6 +31,7 @@ namespace MomsKitchen.API
             services.AddCors();
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
             services.AddAuthorization();
+            services.AddValidators();
             services.ConfigureAuthentication(Configuration);
         }
 
@@ -43,6 +44,8 @@ namespace MomsKitchen.API
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MomsKitchen.API v1"));
             }
+
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseHttpsRedirection();
 

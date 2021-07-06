@@ -12,9 +12,9 @@ namespace MomsKitchen.API.Services.ApplicationUsers
         Task<List<ApplicationUserDetails>> GetUsers();
         Task<ApplicationUserDetails> GetUser(Guid userId);
         Task<bool> DeleteUser(Guid userId);
-        Task<bool> CreateUser(PostUserRequest request);
-        Task<bool> CreateAdmin(PostUserRequest request);
-        Task<bool> UpdateUser(Guid userId, UpdateUserRequest request);
+        Task<bool> CreateUser(UserRequest request);
+        Task<bool> CreateAdmin(UserRequest request);
+        Task<bool> UpdateUser(Guid userId, UserRequest request);
         Task<ApplicationUserDetails> GetByUserName(string username);
     }
 }

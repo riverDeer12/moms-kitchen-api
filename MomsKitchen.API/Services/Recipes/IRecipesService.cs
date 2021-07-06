@@ -10,7 +10,7 @@ namespace MomsKitchen.API.Services
         Task<List<RecipeDetails>> GetRecipes();
         Task<RecipeDetails> GetRecipe(Guid recipeId);
         Task<bool> DeleteRecipe(Guid recipeId);
-        Task<bool> CreateRecipe(PostRecipeRequest request);
-        Task<bool> UpdateRecipe(Guid recipeId, UpdateRecipeRequest request); 
+        Task<bool> CreateRecipe(RecipeRequest request);
+        Task<bool> UpdateRecipe(Guid recipeId, RecipeRequest request); 
     }
 }

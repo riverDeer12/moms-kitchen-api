@@ -9,7 +9,7 @@ using MomsKitchen.DATA.Entities;
 
 namespace MomsKitchen.API.Services.Recipes
 {
-    public class RecipesService : ControllerService<Recipe, PostRecipeRequest, UpdateRecipeRequest>, IRecipesService
+    public class RecipesService : ControllerService<Recipe, RecipeRequest, RecipeRequest>, IRecipesService
     {
         public RecipesService(
         IRepository<Recipe> repository,
@@ -32,8 +32,8 @@ namespace MomsKitchen.API.Services.Recipes
 
         public async Task<bool> DeleteRecipe(Guid recipeId) => await Delete(recipeId);
 
-        public async Task<bool> CreateRecipe(PostRecipeRequest request) => await Create(request);
+        public async Task<bool> CreateRecipe(RecipeRequest request) => await Create(request);
 
-        public async Task<bool> UpdateRecipe(Guid recipeId, UpdateRecipeRequest request) => await Update(recipeId, request);
+        public async Task<bool> UpdateRecipe(Guid recipeId, RecipeRequest request) => await Update(recipeId, request);
     }
 }
