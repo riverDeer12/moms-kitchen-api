@@ -56,7 +56,10 @@ namespace MomsKitchen.API
 
             app.UseAuthorization();
 
-            app.UseCors(builder => builder.WithOrigins(Configuration["ApplicationSettings:ClientUrl"]).AllowAnyHeader().AllowAnyMethod());
+            app.UseCors(builder => builder
+                    .WithOrigins(Configuration["ApplicationSettings:ClientUrl"])
+                    .AllowAnyHeader()
+                    .AllowAnyMethod());
             
             app.UseEndpoints(endpoints =>
             {
