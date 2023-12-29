@@ -1,3 +1,4 @@
+using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
 using MomsKitchen;
 
@@ -9,6 +10,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<MomsKitchenContext>(o =>
     o.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddFastEndpoints();
 
 var app = builder.Build();
 
@@ -23,6 +26,6 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-app.MapControllers();
+app.UseFastEndpoints();
 
 app.Run();
