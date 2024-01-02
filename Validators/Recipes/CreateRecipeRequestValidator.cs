@@ -15,5 +15,9 @@ public class CreateRecipeRequestValidator : Validator<CreateRecipeRequest>
         RuleFor<string>(c => c.Description)
             .NotEmpty()
             .WithMessage("Recipe description is required.");
+        
+        RuleFor<List<Guid>>(c => c.Categories)
+            .NotEmpty()
+            .WithMessage("At least one category needs to be selected.");
     }
 }
