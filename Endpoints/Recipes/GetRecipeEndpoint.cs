@@ -1,13 +1,12 @@
 using FastEndpoints;
-
 namespace MomsKitchen.Endpoints.Recipes;
 
-public class GetRecipesEndpoint : EndpointWithoutRequest
+public class GetRecipeEndpoint : EndpointWithoutRequest
 {
     public override void Configure()
     {
         Verbs(Http.GET);
-        Routes("recipes");
+        Routes("recipes/{id}");
         AllowAnonymous();
         Options(x => x.WithTags("Recipes"));
     }

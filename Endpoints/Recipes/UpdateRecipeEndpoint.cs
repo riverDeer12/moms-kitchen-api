@@ -4,17 +4,17 @@ using MomsKitchen.Contracts.Recipes.Responses;
 
 namespace MomsKitchen.Endpoints.Recipes;
 
-public class CreateRecipeEndpoint : Endpoint<CreateRecipeRequest, RecipeResponse>
+public class UpdateRecipeEndpoint : Endpoint<UpdateRecipeRequest, RecipeResponse>
 {
     public override void Configure()
     {
-        Verbs(Http.POST);
+        Verbs(Http.PUT);
         Routes("recipes");
         AllowAnonymous();
         Options(x => x.WithTags("Recipes"));
     }
     
-    public override async Task HandleAsync(CreateRecipeRequest request, CancellationToken ct)
+    public override async Task HandleAsync(UpdateRecipeRequest request, CancellationToken ct)
     {
         await base.HandleAsync(request, ct);
     }

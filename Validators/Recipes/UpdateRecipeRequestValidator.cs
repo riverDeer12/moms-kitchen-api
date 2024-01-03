@@ -4,14 +4,10 @@ using MomsKitchen.Contracts.Recipes.Requests;
 
 namespace MomsKitchen.Validators.Recipes;
 
-public class CreateRecipeRequestValidator : Validator<CreateRecipeRequest>
+public class UpdateRecipeRequestValidator : Validator<UpdateRecipeRequest>
 {
-    public CreateRecipeRequestValidator()
+    public UpdateRecipeRequestValidator()
     {
-        RuleFor(c => c.IsActive)
-            .NotEmpty()
-            .WithMessage("Recipe activity status is required.");
-        
         RuleFor<string>(c => c.Name)
             .NotEmpty()
             .WithMessage("Recipe name is required.");

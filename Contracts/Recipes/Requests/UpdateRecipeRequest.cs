@@ -1,6 +1,6 @@
-namespace MomsKitchen.Contracts.Recipes.Requests;
+﻿namespace MomsKitchen.Contracts.Recipes.Requests;
 
-public class CreateRecipeRequest
+public class UpdateRecipeRequest
 {
     public bool IsActive { get; set; }
     public string Name { get; set; }

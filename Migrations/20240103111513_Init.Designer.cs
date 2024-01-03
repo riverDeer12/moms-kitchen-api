@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MomsKitchen.Migrations
 {
     [DbContext(typeof(MomsKitchenContext))]
-    [Migration("20240102141339_Init")]
+    [Migration("20240103111513_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -27,15 +27,15 @@ namespace MomsKitchen.Migrations
 
             modelBuilder.Entity("CategoryRecipe", b =>
                 {
-                    b.Property<Guid>("CategoriesId")
+                    b.Property<Guid>("CategoriesCategoryId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("RecipesId")
+                    b.Property<Guid>("RecipesRecipeId")
                         .HasColumnType("uuid");
 
-                    b.HasKey("CategoriesId", "RecipesId");
+                    b.HasKey("CategoriesCategoryId", "RecipesRecipeId");
 
-                    b.HasIndex("RecipesId");
+                    b.HasIndex("RecipesRecipeId");
 
                     b.ToTable("CategoryRecipe");
                 });
@@ -43,7 +43,8 @@ namespace MomsKitchen.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("RoleId");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -63,14 +64,15 @@ namespace MomsKitchen.Migrations
                         .IsUnique()
                         .HasDatabaseName("RoleNameIndex");
 
-                    b.ToTable("AspNetRoles", (string)null);
+                    b.ToTable("Roles", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("RoleClaimId");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
@@ -88,13 +90,14 @@ namespace MomsKitchen.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetRoleClaims", (string)null);
+                    b.ToTable("RoleClaims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("UserId");
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("integer");
@@ -156,7 +159,7 @@ namespace MomsKitchen.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex");
 
-                    b.ToTable("AspNetUsers", (string)null);
+                    b.ToTable("Users", (string)null);
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
 
@@ -167,7 +170,8 @@ namespace MomsKitchen.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("UserClaimId");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
@@ -185,7 +189,7 @@ namespace MomsKitchen.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserClaims", (string)null);
+                    b.ToTable("UserClaims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -207,7 +211,7 @@ namespace MomsKitchen.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserLogins", (string)null);
+                    b.ToTable("UserLogins", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
@@ -222,7 +226,7 @@ namespace MomsKitchen.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles", (string)null);
+                    b.ToTable("UserRoles", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -241,12 +245,12 @@ namespace MomsKitchen.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("AspNetUserTokens", (string)null);
+                    b.ToTable("UserTokens", (string)null);
                 });
 
             modelBuilder.Entity("MomsKitchen.Entities.Category", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("CategoryId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
@@ -282,14 +286,14 @@ namespace MomsKitchen.Migrations
                     b.Property<DateTime>("UpdatedBy")
                         .HasColumnType("timestamp with time zone");
 
-                    b.HasKey("Id");
+                    b.HasKey("CategoryId");
 
                     b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("MomsKitchen.Entities.Recipe", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("RecipeId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
@@ -325,7 +329,7 @@ namespace MomsKitchen.Migrations
                     b.Property<DateTime>("UpdatedBy")
                         .HasColumnType("timestamp with time zone");
 
-                    b.HasKey("Id");
+                    b.HasKey("RecipeId");
 
                     b.ToTable("Recipes");
                 });
@@ -374,13 +378,13 @@ namespace MomsKitchen.Migrations
                 {
                     b.HasOne("MomsKitchen.Entities.Category", null)
                         .WithMany()
-                        .HasForeignKey("CategoriesId")
+                        .HasForeignKey("CategoriesCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("MomsKitchen.Entities.Recipe", null)
                         .WithMany()
-                        .HasForeignKey("RecipesId")
+                        .HasForeignKey("RecipesRecipeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

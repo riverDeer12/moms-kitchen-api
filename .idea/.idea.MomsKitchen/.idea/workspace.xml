@@ -5,25 +5,22 @@
     <projectFile profileName="IIS Express">MomsKitchen.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a0f08d26-34bf-4005-a1df-bc48c8b69ece" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.MomsKitchen/.idea/projectSettingsUpdater.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Entities/ApplicationUser.cs" afterDir="false" />
+    <list default="true" id="a0f08d26-34bf-4005-a1df-bc48c8b69ece" name="Changes" comment="added ApplicationUser entity + .NET Identity integration for authentication and authorization">
+      <change afterPath="$PROJECT_DIR$/Contracts/Recipes/Requests/UpdateRecipeRequest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Endpoints/Recipes/UpdateRecipeEndpoint.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Validators/Recipes/UpdateRecipeRequestValidator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.MomsKitchen/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MomsKitchen/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Contracts/Recipes/Requests/CreateRecipeRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Contracts/Recipes/Requests/CreateRecipeRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Contracts/Recipes/Responses/RecipeResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Contracts/Recipes/Responses/RecipeResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Endpoints/Recipes/CreateRecipeEndpoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Endpoints/Recipes/CreateRecipeEndpoint.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Endpoints/Recipes/GetRecipesEndpoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Endpoints/Recipes/GetRecipesEndpoint.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Entities/BaseEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Entities/BaseEntity.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Entities/Category.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Entities/Category.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Entities/Recipe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Entities/Recipe.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20231228133426_Init.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20231228133426_Init.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20231228134118_RecipeCategoryRelation00.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20231228134118_RecipeCategoryRelation00.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/MomsKitchenContextModelSnapshot.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MomsKitchen.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/MomsKitchen.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MomsKitchen.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/MomsKitchen.sln.DotSettings.user" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20240102141339_Init.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Migrations/20240103111513_Init.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20240102141339_Init.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Migrations/20240103111513_Init.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/MomsKitchenContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Migrations/MomsKitchenContextModelSnapshot.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MomsKitchenContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MomsKitchenContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Validators/Recipes/CreateRecipeRequestValidator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Validators/Recipes/CreateRecipeRequestValidator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/appsettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +33,7 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="Toolset" />
   </component>
@@ -49,11 +47,13 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
+    "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "SolutionBuilderGeneralOptionsPage",
     "vue.rearranger.settings.migration": "true"
   },
@@ -105,15 +105,27 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1704193742353</updated>
-      <workItem from="1704193743718" duration="6058000" />
+      <workItem from="1704193743718" duration="10959000" />
     </task>
+    <task id="LOCAL-00001" summary="added ApplicationUser entity + .NET Identity integration for authentication and authorization">
+      <created>1704209557688</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1704209557688</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="added ApplicationUser entity + .NET Identity integration for authentication and authorization" />
+    <option name="LAST_COMMIT_MESSAGE" value="added ApplicationUser entity + .NET Identity integration for authentication and authorization" />
   </component>
 </project>
