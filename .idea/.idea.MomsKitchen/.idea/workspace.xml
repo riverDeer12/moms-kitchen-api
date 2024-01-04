@@ -5,22 +5,16 @@
     <projectFile profileName="IIS Express">MomsKitchen.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a0f08d26-34bf-4005-a1df-bc48c8b69ece" name="Changes" comment="added ApplicationUser entity + .NET Identity integration for authentication and authorization">
-      <change afterPath="$PROJECT_DIR$/Contracts/Recipes/Requests/UpdateRecipeRequest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Endpoints/Recipes/UpdateRecipeEndpoint.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Validators/Recipes/UpdateRecipeRequestValidator.cs" afterDir="false" />
+    <list default="true" id="a0f08d26-34bf-4005-a1df-bc48c8b69ece" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Exceptions/BadRequestException.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Exceptions/ExceptionDetails.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Exceptions/NotFoundException.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MomsKitchen/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MomsKitchen/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Contracts/Recipes/Requests/CreateRecipeRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Contracts/Recipes/Requests/CreateRecipeRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Endpoints/Recipes/CreateRecipeEndpoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Endpoints/Recipes/CreateRecipeEndpoint.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Endpoints/Recipes/GetRecipesEndpoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Endpoints/Recipes/GetRecipesEndpoint.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Entities/BaseEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Entities/BaseEntity.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entities/Category.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Entities/Category.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entities/Recipe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Entities/Recipe.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20240102141339_Init.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Migrations/20240103111513_Init.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20240102141339_Init.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Migrations/20240103111513_Init.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/MomsKitchenContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Migrations/MomsKitchenContextModelSnapshot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20240103111513_Init.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20240103111513_Init.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/MomsKitchenContextModelSnapshot.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/MomsKitchenContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MomsKitchenContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Validators/Recipes/CreateRecipeRequestValidator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Validators/Recipes/CreateRecipeRequestValidator.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,26 +39,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "SolutionBuilderGeneralOptionsPage",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;SolutionBuilderGeneralOptionsPage&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "C:\\Users\\Milan\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\DecompilerCache",
-      "C:\\Users\\Milan\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\SourcesCache",
-      "C:\\Users\\Milan\\AppData\\Local\\Symbols\\src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\Milan\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\Milan\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\Milan\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected=".NET Launch Settings Profile.MomsKitchen: ApiWithPostgres">
     <configuration name="MomsKitchen: ApiWithPostgres" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/MomsKitchen.csproj" />
@@ -105,7 +99,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1704193742353</updated>
-      <workItem from="1704193743718" duration="10959000" />
+      <workItem from="1704193743718" duration="13492000" />
+      <workItem from="1704369128518" duration="4132000" />
     </task>
     <task id="LOCAL-00001" summary="added ApplicationUser entity + .NET Identity integration for authentication and authorization">
       <created>1704209557688</created>
@@ -114,7 +109,14 @@
       <option name="project" value="LOCAL" />
       <updated>1704209557688</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="added endpoints for recipes&#10;configured tags for swagger endpoint grouping&#10;renamed IdentityDBContext table names">
+      <created>1704284007933</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1704284007933</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -126,6 +128,7 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="added ApplicationUser entity + .NET Identity integration for authentication and authorization" />
-    <option name="LAST_COMMIT_MESSAGE" value="added ApplicationUser entity + .NET Identity integration for authentication and authorization" />
+    <MESSAGE value="added endpoints for recipes&#10;configured tags for swagger endpoint grouping&#10;renamed IdentityDBContext table names" />
+    <option name="LAST_COMMIT_MESSAGE" value="added endpoints for recipes&#10;configured tags for swagger endpoint grouping&#10;renamed IdentityDBContext table names" />
   </component>
 </project>

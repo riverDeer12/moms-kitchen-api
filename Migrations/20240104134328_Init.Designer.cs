@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MomsKitchen.Migrations
 {
     [DbContext(typeof(MomsKitchenContext))]
-    [Migration("20240103111513_Init")]
+    [Migration("20240104134328_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -65,6 +65,26 @@ namespace MomsKitchen.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("Roles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "69a4116d-b1bd-4f0b-b6a7-a13bb5eb639f",
+                            Name = "SuperAdmin",
+                            NormalizedName = "SUPERADMIN"
+                        },
+                        new
+                        {
+                            Id = "a1897ddf-24d5-43cb-af30-1e8425003eae",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "2e275270-0e64-4926-905e-70a2fab92006",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -227,6 +247,13 @@ namespace MomsKitchen.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("UserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "cd75a482-cac0-45f2-9c20-bae54f363742",
+                            RoleId = "69a4116d-b1bd-4f0b-b6a7-a13bb5eb639f"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -257,14 +284,14 @@ namespace MomsKitchen.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("CreatedBy")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("DeletedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("DeletedBy")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<Guid>("DeletedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -283,8 +310,8 @@ namespace MomsKitchen.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("UpdatedBy")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<Guid>("UpdatedBy")
+                        .HasColumnType("uuid");
 
                     b.HasKey("CategoryId");
 
@@ -300,14 +327,14 @@ namespace MomsKitchen.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("CreatedBy")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("DeletedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("DeletedBy")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<Guid>("DeletedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -326,8 +353,8 @@ namespace MomsKitchen.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("UpdatedBy")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<Guid>("UpdatedBy")
+                        .HasColumnType("uuid");
 
                     b.HasKey("RecipeId");
 
@@ -372,6 +399,35 @@ namespace MomsKitchen.Migrations
                         .HasColumnType("uuid");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "cd75a482-cac0-45f2-9c20-bae54f363742",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "bdf2fae7-2bb7-473c-80bf-5baa8f1bcbda",
+                            Email = "superadmin@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "SUPERADMIN@GMAIL.COM",
+                            NormalizedUserName = "SUPERADMIN",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEf4Qp4bTtsDoq+tLe2RmoNhpAYW7v6eWxqgZFxCFyeqyTZba4kJVEYYUcwRgwtOKQ==",
+                            PhoneNumber = "+385915007122",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "7e6a6050-b5d0-4a37-86d6-d8ebdf3959ba",
+                            TwoFactorEnabled = true,
+                            UserName = "superadmin",
+                            ActivityUpdatedAt = new DateTime(2024, 1, 4, 13, 43, 28, 469, DateTimeKind.Utc).AddTicks(3262),
+                            ActivityUpdatedBy = new Guid("cd75a482-cac0-45f2-9c20-bae54f363742"),
+                            Address = "Bartola Kašića 10",
+                            CreatedAt = new DateTime(2024, 1, 4, 13, 43, 28, 469, DateTimeKind.Utc).AddTicks(3257),
+                            CreatedBy = new Guid("cd75a482-cac0-45f2-9c20-bae54f363742"),
+                            FirstName = "Super",
+                            IsActive = true,
+                            LastName = "Admin",
+                            UpdatedAt = new DateTime(2024, 1, 4, 13, 43, 28, 469, DateTimeKind.Utc).AddTicks(3260),
+                            UpdatedBy = new Guid("cd75a482-cac0-45f2-9c20-bae54f363742")
+                        });
                 });
 
             modelBuilder.Entity("CategoryRecipe", b =>

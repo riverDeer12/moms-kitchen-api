@@ -4,6 +4,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace MomsKitchen.Migrations
 {
     /// <inheritdoc />
@@ -20,12 +22,12 @@ namespace MomsKitchen.Migrations
                     Name = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    CreatedBy = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uuid", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedBy = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    UpdatedBy = table.Column<Guid>(type: "uuid", nullable: false),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
                     DeletedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    DeletedBy = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    DeletedBy = table.Column<Guid>(type: "uuid", nullable: false),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -41,12 +43,12 @@ namespace MomsKitchen.Migrations
                     Name = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    CreatedBy = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uuid", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedBy = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    UpdatedBy = table.Column<Guid>(type: "uuid", nullable: false),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
                     DeletedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    DeletedBy = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    DeletedBy = table.Column<Guid>(type: "uuid", nullable: false),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -233,6 +235,26 @@ namespace MomsKitchen.Migrations
                         principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Roles",
+                columns: new[] { "RoleId", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "2e275270-0e64-4926-905e-70a2fab92006", null, "User", "USER" },
+                    { "69a4116d-b1bd-4f0b-b6a7-a13bb5eb639f", null, "SuperAdmin", "SUPERADMIN" },
+                    { "a1897ddf-24d5-43cb-af30-1e8425003eae", null, "Admin", "ADMIN" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "UserId", "AccessFailedCount", "ActivityUpdatedAt", "ActivityUpdatedBy", "Address", "ConcurrencyStamp", "CreatedAt", "CreatedBy", "Discriminator", "Email", "EmailConfirmed", "FirstName", "IsActive", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UpdatedAt", "UpdatedBy", "UserName" },
+                values: new object[] { "cd75a482-cac0-45f2-9c20-bae54f363742", 0, new DateTime(2024, 1, 4, 13, 43, 28, 469, DateTimeKind.Utc).AddTicks(3262), new Guid("cd75a482-cac0-45f2-9c20-bae54f363742"), "Bartola Kašića 10", "bdf2fae7-2bb7-473c-80bf-5baa8f1bcbda", new DateTime(2024, 1, 4, 13, 43, 28, 469, DateTimeKind.Utc).AddTicks(3257), new Guid("cd75a482-cac0-45f2-9c20-bae54f363742"), "ApplicationUser", "superadmin@gmail.com", false, "Super", true, "Admin", false, null, "SUPERADMIN@GMAIL.COM", "SUPERADMIN", "AQAAAAIAAYagAAAAEEf4Qp4bTtsDoq+tLe2RmoNhpAYW7v6eWxqgZFxCFyeqyTZba4kJVEYYUcwRgwtOKQ==", "+385915007122", false, "7e6a6050-b5d0-4a37-86d6-d8ebdf3959ba", true, new DateTime(2024, 1, 4, 13, 43, 28, 469, DateTimeKind.Utc).AddTicks(3260), new Guid("cd75a482-cac0-45f2-9c20-bae54f363742"), "superadmin" });
+
+            migrationBuilder.InsertData(
+                table: "UserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "69a4116d-b1bd-4f0b-b6a7-a13bb5eb639f", "cd75a482-cac0-45f2-9c20-bae54f363742" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_CategoryRecipe_RecipesRecipeId",
