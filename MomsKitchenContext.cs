@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MomsKitchen.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using MomsKitchen.Constants;
 using MomsKitchen.Exceptions;
 
 namespace MomsKitchen;
@@ -158,7 +159,7 @@ public class MomsKitchenContext : IdentityDbContext
         var loggedUserId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
 
         if (loggedUserId == null)
-            throw new BadRequestException("Action performed by unauthorized user.");
+            throw new BadRequestException(ValidationMessages.UnauthorizedAction);
 
         return Guid.Parse(loggedUserId);
     }

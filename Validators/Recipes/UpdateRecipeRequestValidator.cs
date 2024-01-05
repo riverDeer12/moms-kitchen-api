@@ -1,5 +1,6 @@
 using FastEndpoints;
 using FluentValidation;
+using MomsKitchen.Constants;
 using MomsKitchen.Contracts.Recipes.Requests;
 
 namespace MomsKitchen.Validators.Recipes;
@@ -10,14 +11,14 @@ public class UpdateRecipeRequestValidator : Validator<UpdateRecipeRequest>
     {
         RuleFor<string>(c => c.Name)
             .NotEmpty()
-            .WithMessage("Recipe name is required.");
+            .WithMessage(ValidationMessages.Required);
         
         RuleFor<string>(c => c.Description)
             .NotEmpty()
-            .WithMessage("Recipe description is required.");
+            .WithMessage(ValidationMessages.Required);
         
         RuleFor<List<Guid>>(c => c.Categories)
             .NotEmpty()
-            .WithMessage("At least one category needs to be selected.");
+            .WithMessage(ValidationMessages.Required);
     }
 }

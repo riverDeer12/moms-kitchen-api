@@ -5,16 +5,15 @@
     <projectFile profileName="IIS Express">MomsKitchen.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a0f08d26-34bf-4005-a1df-bc48c8b69ece" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Exceptions/BadRequestException.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Exceptions/ExceptionDetails.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Exceptions/NotFoundException.cs" afterDir="false" />
+    <list default="true" id="a0f08d26-34bf-4005-a1df-bc48c8b69ece" name="Changes" comment="seeding procedure&#10;context save changes override method&#10;request extension">
+      <change afterPath="$PROJECT_DIR$/Constants/ValidationMessages.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MomsKitchen/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MomsKitchen/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entities/BaseEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Entities/BaseEntity.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20240103111513_Init.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20240103111513_Init.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/MomsKitchenContextModelSnapshot.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Endpoints/Recipes/DeleteRecipeEndpoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Endpoints/Recipes/DeleteRecipeEndpoint.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/MomsKitchenContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Migrations/MomsKitchenContextModelSnapshot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MomsKitchen.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/MomsKitchen.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MomsKitchenContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MomsKitchenContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Validators/Recipes/CreateRecipeRequestValidator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Validators/Recipes/CreateRecipeRequestValidator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Validators/Recipes/UpdateRecipeRequestValidator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Validators/Recipes/UpdateRecipeRequestValidator.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +99,7 @@
       <option name="presentableId" value="Default" />
       <updated>1704193742353</updated>
       <workItem from="1704193743718" duration="13492000" />
-      <workItem from="1704369128518" duration="4132000" />
+      <workItem from="1704369128518" duration="8427000" />
     </task>
     <task id="LOCAL-00001" summary="added ApplicationUser entity + .NET Identity integration for authentication and authorization">
       <created>1704209557688</created>
@@ -116,7 +115,14 @@
       <option name="project" value="LOCAL" />
       <updated>1704284007933</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="seeding procedure&#10;context save changes override method&#10;request extension">
+      <created>1704382891756</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1704382891756</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -129,6 +135,7 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="added ApplicationUser entity + .NET Identity integration for authentication and authorization" />
     <MESSAGE value="added endpoints for recipes&#10;configured tags for swagger endpoint grouping&#10;renamed IdentityDBContext table names" />
-    <option name="LAST_COMMIT_MESSAGE" value="added endpoints for recipes&#10;configured tags for swagger endpoint grouping&#10;renamed IdentityDBContext table names" />
+    <MESSAGE value="seeding procedure&#10;context save changes override method&#10;request extension" />
+    <option name="LAST_COMMIT_MESSAGE" value="seeding procedure&#10;context save changes override method&#10;request extension" />
   </component>
 </project>
