@@ -7,7 +7,7 @@ public class GetRecipesEndpoint : EndpointWithoutRequest
     public override void Configure()
     {
         Verbs(Http.GET);
-        Routes("recipes");
+        Routes("api/recipes");
         AllowAnonymous();
         Options(x => x.WithTags("Recipes"));
     }

@@ -1,5 +1,6 @@
 using System.Text;
 using FastEndpoints;
+using FastEndpoints.Swagger;
 using MomsKitchen;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -18,7 +19,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<MomsKitchenContext>(o =>
     o.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddFastEndpoints();
+builder.Services.AddFastEndpoints()
+    .SwaggerDocument();
 
 builder.Services.AddAuthentication(x =>
     {
@@ -61,6 +63,7 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
-app.UseFastEndpoints();
+app.UseFastEndpoints()
+    .UseSwaggerGen();
 
 app.Run();

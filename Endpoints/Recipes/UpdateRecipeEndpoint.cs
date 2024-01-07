@@ -9,7 +9,7 @@ public class UpdateRecipeEndpoint : Endpoint<UpdateRecipeRequest, RecipeResponse
     public override void Configure()
     {
         Verbs(Http.PUT);
-        Routes("recipes");
+        Routes("api/recipes");
         AllowAnonymous();
         Options(x => x.WithTags("Recipes"));
     }

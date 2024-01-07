@@ -7,7 +7,7 @@ public class DeleteRecipeEndpoint : EndpointWithoutRequest
     public override void Configure()
     {
         Verbs(Http.DELETE);
-        Routes("recipes/{id}");
+        Routes("api/recipes/{id}");
         AllowAnonymous();
         Options(x => x.WithTags("Recipes"));
     }
