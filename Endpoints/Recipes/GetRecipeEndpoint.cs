@@ -19,12 +19,6 @@ public class GetRecipeEndpoint : Endpoint<GetRecipeRequest, RecipeResponse>
     public override void Configure()
     {
         Get("api/recipes/{recipeId}");
-        Summary(s =>
-        {
-            s.Summary = "quick test to echo the received payload";
-            s.Params["recipeId"] = "Recipe identifier.";
-            s.RequestParam(r => r.RecipeId, "overriden username description");
-        });
         Options(x => x.WithTags("Recipes"));
         AllowAnonymous();
     }
