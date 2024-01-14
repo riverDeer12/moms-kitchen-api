@@ -14,6 +14,7 @@ public class MomsKitchenContext : IdentityDbContext
      * Seeding constant values.
      */
     private const string SuperAdminId = "cd75a482-cac0-45f2-9c20-bae54f363742";
+
     private const string SuperAdminRoleId = "69a4116d-b1bd-4f0b-b6a7-a13bb5eb639f";
     private const string AdminRoleId = "a1897ddf-24d5-43cb-af30-1e8425003eae";
     private const string UserRoleId = "2e275270-0e64-4926-905e-70a2fab92006";
@@ -30,6 +31,7 @@ public class MomsKitchenContext : IdentityDbContext
      * DB sets.
      */
     public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+
     public DbSet<Recipe> Recipes { get; set; }
     public DbSet<Category> Categories { get; set; }
 
@@ -109,6 +111,22 @@ public class MomsKitchenContext : IdentityDbContext
     {
         new IdentityUserRole<string> { UserId = SuperAdminId, RoleId = SuperAdminRoleId }
     };
+    
+    /**
+     * Helper method for getting
+     * logged user id.
+     */
+    private Guid GetLoggedUserId()
+    {
+        if (_httpContextAccessor.HttpContext == null) return Guid.Empty;
+
+        var loggedUserId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
+
+        if (loggedUserId == null)
+            throw new BadRequestException(ValidationMessages.UnauthorizedAction);
+
+        return Guid.Parse(loggedUserId);
+    }
 
     /**
      * Method that overrides
@@ -127,41 +145,27 @@ public class MomsKitchenContext : IdentityDbContext
 
         foreach (var entityEntry in entries)
         {
-            ((BaseEntity)entityEntry.Entity).UpdatedAt = DateTime.Now;
-            ((BaseEntity)entityEntry.Entity).UpdatedBy = issuerId;
-
-            if (entityEntry.State == EntityState.Added)
+            switch (entityEntry.State)
             {
-                ((BaseEntity)entityEntry.Entity).IsActive = true;
-                ((BaseEntity)entityEntry.Entity).CreatedAt = DateTime.Now;
-                ((BaseEntity)entityEntry.Entity).CreatedBy = issuerId;
+                case EntityState.Added:
+                    ((BaseEntity)entityEntry.Entity).InitializeCreate(issuerId);
+                    break;
+                case EntityState.Modified:
+                    ((BaseEntity)entityEntry.Entity).InitializeUpdate(issuerId);
+                    break;
+                case EntityState.Deleted:
+                    ((BaseEntity)entityEntry.Entity).InitializeDelete(issuerId);
+                    break;
+                case EntityState.Detached:
+                    break;
+                case EntityState.Unchanged:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
-
-            if (!softDelete) continue;
-
-            ((BaseEntity)entityEntry.Entity).IsActive = false;
-            ((BaseEntity)entityEntry.Entity).IsDeleted = true;
-            ((BaseEntity)entityEntry.Entity).DeletedAt = DateTime.Now;
-            ((BaseEntity)entityEntry.Entity).DeletedBy = issuerId;
         }
 
         return await base.SaveChangesAsync(true, cancellationToken).ConfigureAwait(false);
-    }
-
-    /**
-     * Helper method for getting
-     * logged user id.
-     */
-    private Guid GetLoggedUserId()
-    {
-        if (_httpContextAccessor.HttpContext == null) return Guid.Empty;
-
-        var loggedUserId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
-
-        if (loggedUserId == null)
-            throw new BadRequestException(ValidationMessages.UnauthorizedAction);
-
-        return Guid.Parse(loggedUserId);
     }
 
     /**
