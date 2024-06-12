@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MomsKitchen.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+367c45742e87fd8e0e89eee0fb6b5d25a40bd6f2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b08d6e7bc06d07d97dccc25372c985e05ca9be11")]
 [assembly: System.Reflection.AssemblyProductAttribute("MomsKitchen.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MomsKitchen.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
