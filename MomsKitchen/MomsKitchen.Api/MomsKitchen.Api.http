@@ -1,0 +1,6 @@
+@MomsKitchen.Api_HostAddress = http://localhost:5108
+
+GET {{MomsKitchen.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
