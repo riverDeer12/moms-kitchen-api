@@ -2,7 +2,6 @@ using FastEndpoints;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MomsKitchen.Api.Database;
-using MomsKitchen.Api.Database.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,14 +14,24 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddDbContext<MomsKitchenContext>(options =>
     options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<MomsKitchenContext>()
+builder.Services
+    .AddIdentity<IdentityUser, IdentityRole>()
+    .AddEntityFrameworkStores<MomsKitchenContext>()
     .AddDefaultTokenProviders();
+
+builder.Services.AddAuthentication();
+
+builder.Services.AddAuthorization();
 
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
 app.UseFastEndpoints();
+
+app.UseAuthentication();
+
+app.UseAuthorization();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

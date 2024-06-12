@@ -21,6 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Database\Entities" />
       <Folder Include="Features\Roles" />
     </ItemGroup>
 

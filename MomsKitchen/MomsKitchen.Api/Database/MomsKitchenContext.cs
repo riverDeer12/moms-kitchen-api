@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MomsKitchen.Api.Constants;
-using MomsKitchen.Api.Database.Entities;
 
 namespace MomsKitchen.Api.Database;
 
@@ -12,10 +11,6 @@ public class MomsKitchenContext : IdentityDbContext
     {
     }
 
-    public DbSet<User> Users { get; set; }
-
-    public DbSet<Role> Roles { get; set; }
-
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
@@ -24,12 +19,12 @@ public class MomsKitchenContext : IdentityDbContext
         {
             entity.ToTable(name: "Users");
             entity.Property(p => p.Id).HasColumnName("UserId");
-            entity.HasData(SeedData.SuperAdminData);
+            entity.HasData(SeedData.GetSuperAdminData());
         });
 
         builder.Entity<IdentityRole>(entity =>
         {
-            entity.ToTable(name: "Role");
+            entity.ToTable(name: "Roles");
             entity.HasData(SeedData.SuperAdminRole);
         });
 
